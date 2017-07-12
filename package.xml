@@ -1,31 +1,38 @@
 <?xml version="1.0"?>
 <package>
   <name>pheeno_ros_sim</name>
-  <version>0.0.0</version>
-  <description>Gazebo simulation ROS package for Pheeno system!</description>
+  <version>0.0.1</version>
+  <description>
+    Gazebo simulation ROS package for Pheeno system!
+  </description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
-  <maintainer email="acs-lab@todo.todo">acs-lab</maintainer>
+  <maintainer email="zkakish@gmail.com">Zahi Kakish</maintainer>
 
 
   <!-- One license tag required, multiple allowed, one license per tag -->
   <!-- Commonly used license strings: -->
   <!--   BSD, MIT, Boost Software License, GPLv2, GPLv3, LGPLv2.1, LGPLv3 -->
-  <license>TODO</license>
+  <license>BSD</license>
 
 
   <!-- Url tags are optional, but mutiple are allowed, one per tag -->
   <!-- Optional attribute type can be: website, bugtracker, or repository -->
   <!-- Example: -->
   <!-- <url type="website">http://wiki.ros.org/pheeno_ros</url> -->
+  <url type="website">https://acslaboratory.github.io</url>
+  <url type="repository">
+    https://github.com/ACSLaboratory/pheeno_ros_sim.git
+  </url>
 
 
   <!-- Author tags are optional, mutiple are allowed, one per tag -->
   <!-- Authors do not have to be maintianers, but could be -->
   <!-- Example: -->
   <!-- <author email="jane.doe@example.com">Jane Doe</author> -->
+  <author>Zahi Kakish</author>
 
 
   <!-- The *_depend tags are used to specify dependencies -->
@@ -47,6 +54,7 @@
   <build_depend>rospy</build_depend>
   <build_depend>std_msgs</build_depend>
   <build_depend>message_generation</build_depend>
+
   <run_depend>actionlib</run_depend>
   <run_depend>actionlib_msgs</run_depend>
   <run_depend>geometry_msgs</run_depend>
