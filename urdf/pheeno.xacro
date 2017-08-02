@@ -401,8 +401,8 @@
   </joint>
 
   <!-- WHEELS -->
-  <wheel lr="right" parent="base_plate_link" translateX="-0.72" translateY="1" translateZ="-0.5" flipY="1"/>
-  <wheel lr="left" parent="base_plate_link" translateX="-0.72" translateY="-1" translateZ="-0.5" flipY="1"/>
+  <wheel lr="right" parent="base_plate_link" translateX="-0.72" translateY="-1" translateZ="-0.5" flipY="1"/>
+  <wheel lr="left" parent="base_plate_link" translateX="-0.72" translateY="1" translateZ="-0.5" flipY="1"/>
 
   <!-- CASTER BASE -->
   <link name="caster_base_link">
