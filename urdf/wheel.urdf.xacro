@@ -63,7 +63,7 @@
 
     <!-- Transmission -->
     <transmission name="${lr}_wheel_joint_transmission">
-      <type>transmission_interface/SimpleTransmission</type>
+      <type>transmission_interface/DifferentialTransmission</type>
       <joint name="${lr}_wheel_joint">
         <hardwareInterface>EffortJointInterface</hardwareInterface>
       </joint>
