@@ -59,9 +59,9 @@
             <horizontal>
               <samples>720</samples>
               <resolution>1</resolution>
-              <min_angle>${-PI/30}</min_angle>
+              <min_angle>${-PI/20}</min_angle>
               <!-- -1.570796 -->
-              <max_angle>${PI/30}</max_angle>
+              <max_angle>${PI/20}</max_angle>
               <!-- 1.570796 -->
             </horizontal>
           </scan>
@@ -71,7 +71,7 @@
             <resolution>0.001</resolution>
           </range>
         </ray>
-        <plugin name="gazebo_ros_ir_sensor_${pos}_controller" filename="libgazebo_ros_laser.so">
+        <plugin name="gazebo_ros_ir_sensor_${pos}_controller" filename="libgazebo_ros_ir_sensor.so">
           <topicName>scan_${pos}</topicName>
           <frameName>ir_sensor_${pos}_link</frameName>
         </plugin>
