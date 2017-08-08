@@ -117,6 +117,12 @@ include_directories(
 ADD_LIBRARY(gazebo_ros_ir_sensor SHARED src/gazebo_ros_ir_sensor.cpp)
 TARGET_LINK_LIBRARIES(gazebo_ros_ir_sensor ${catkin_LIBRARIES} ${boost_LIBRARIES} ${GAZEBO_LIBRARIES} RayPlugin)
 
+ADD_EXECUTABLE(obstacle_avoidance src/obstacle_avoidance.cpp)
+TARGET_LINK_LIBRARIES(obstacle_avoidance ${catkin_LIBRARIES})
+
+ADD_EXECUTABLE(random_walk src/random_walk.cpp)
+TARGET_LINK_LIBRARIES(random_walk ${catkin_LIBRARIES})
+
 # all install targets should use catkin DESTINATION variables
 # See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
 
@@ -128,7 +134,7 @@ TARGET_LINK_LIBRARIES(gazebo_ros_ir_sensor ${catkin_LIBRARIES} ${boost_LIBRARIES
 # )
 
 ## Mark executables and/or libraries for installation
-install(TARGETS gazebo_ros_ir_sensor
+install(TARGETS gazebo_ros_ir_sensor obstacle_avoidance
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
