@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<robot name="testbed" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Colors used for testbed walls. -->
+  <material name="Green">
+    <color rgba="0.0 1.0 0.0 1.0"/>
+  </material>
+
+  <material name="Cyan">
+    <color rgba="0.0 1.0 1.0 1.0"/>
+  </material>
+
+  <material name="Orange">
+    <color rgba="1.0 0.65 0.3 1.0"/>
+  </material>
+
+  <material name="Purple">
+    <color rgba="0.55 0 0.55 1.0"/>
+  </material>
+
+  <!-- Universal Values -->
+  <xacro:property name="PI" value="3.14159265358979"/>
+
+  <!-- Property List -->
+  <xacro:property name="side_1_length" value="2.135"/>
+  <xacro:property name="side_1_width" value="0.02"/>
+  <xacro:property name="side_1_height" value="0.245"/>
+  <xacro:property name="side_1_mass" value="1.0"/>
+  <xacro:property name="side_1_x" value="${2.135 / 2}"/>
+  <xacro:property name="side_1_y" value="0.0"/>
+  <xacro:property name="side_1_z" value="0.0"/>
+  <xacro:property name="side_1_roll" value="0.0"/>
+  <xacro:property name="side_1_pitch" value="0.0"/>
+  <xacro:property name="side_1_yaw" value="0.0"/>
+
+  <!-- ############################## LINK ############################## -->
+
+  <link name="side_1_link">
+    <visual>
+      <material name="Orange"/>
+      <origin xyz="${side_1_x} ${side_1_y} ${side_1_z}" rpy="${side_1_roll} ${side_1_pitch} ${side_1_yaw}"/>
+      <geometry>
+        <box size="${side_1_width} ${side_1_length} ${side_1_height}"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="${side_1_mass}"/>
+      <origin xyz="${side_1_x} ${side_1_y} ${side_1_z}" rpy="${side_1_roll} ${side_1_pitch} ${side_1_yaw}"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+    <collision>
+      <origin xyz="${side_1_x} ${side_1_y} ${side_1_z}" rpy="${side_1_roll} ${side_1_pitch} ${side_1_yaw}"/>
+      <geometry>
+        <box size="${side_1_length} ${side_1_width} ${side_1_height}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <gazebo reference="side_1_link">
+    <material>Gazebo/Orange</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+</robot>
