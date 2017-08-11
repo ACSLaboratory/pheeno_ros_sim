@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(pheeno_ros_sim)
 
+## Add support for C++11, supported in ROS Kinetic and newer
+add_definitions(-std=c++11)
+
 
 find_package(catkin REQUIRED COMPONENTS
   actionlib
@@ -73,9 +76,9 @@ generate_messages(
 ## catkin specific configuration
 catkin_package(
   INCLUDE_DIRS include
-  LIBRARIES pheeno_ros
+  LIBRARIES pheeno_ros_sim
   CATKIN_DEPENDS actionlib actionlib_msgs geometry_msgs roscpp rospy std_msgs message_runtime
-  DEPENDS system_lib
+  # DEPENDS system_lib
 )
 
 ###########
@@ -117,11 +120,14 @@ include_directories(
 ADD_LIBRARY(gazebo_ros_ir_sensor SHARED src/gazebo_ros_ir_sensor.cpp)
 TARGET_LINK_LIBRARIES(gazebo_ros_ir_sensor ${catkin_LIBRARIES} ${boost_LIBRARIES} ${GAZEBO_LIBRARIES} RayPlugin)
 
+ADD_LIBRARY(command_line_parser include/command_line_parser.h src/command_line_parser.cpp)
+TARGET_LINK_LIBRARIES(command_line_parser ${catkin_LIBRARIES})
+
 ADD_EXECUTABLE(obstacle_avoidance src/obstacle_avoidance.cpp)
-TARGET_LINK_LIBRARIES(obstacle_avoidance ${catkin_LIBRARIES})
+TARGET_LINK_LIBRARIES(obstacle_avoidance command_line_parser ${catkin_LIBRARIES})
 
 ADD_EXECUTABLE(random_walk src/random_walk.cpp)
-TARGET_LINK_LIBRARIES(random_walk ${catkin_LIBRARIES})
+TARGET_LINK_LIBRARIES(random_walk command_line_parser ${catkin_LIBRARIES})
 
 # all install targets should use catkin DESTINATION variables
 # See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html

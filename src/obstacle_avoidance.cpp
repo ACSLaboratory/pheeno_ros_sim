@@ -1,9 +1,8 @@
 #include "ros/ros.h"
 #include "std_msgs/Float32.h"
 #include "geometry_msgs/Twist.h"
-#include <iostream>
-#include <stdlib.h>
-#include <cmath>
+#include "command_line_parser.h"
+
 
 // Global Variables
 std::vector<double> g_sensor_values(6);
@@ -46,31 +45,26 @@ void avoidObstacles(std::vector<double> values, double& linear, double& angular,
   {
     linear = 0.0;
     angular = -0.07;  // Turn Left
-
   }
   else if (values[5] < range_to_avoid)
   {
     linear = 0.0;
     angular = 0.07;  // Turn Right
-
   }
   else if (values[2] < range_to_avoid)
   {
     linear = 0;
     angular = -0.07;  // Turn Left
-
   }
   else if (values[3] < range_to_avoid)
   {
     linear = 0;
     angular = 0.07;  // Turn Right
-
   }
   else
   {
-    linear = 0;
+    linear = 0.0;
     angular = random_turn_value;
-
   }
 }
 
@@ -107,31 +101,26 @@ void avoidObstacles(std::vector<double> values, double& linear, double& angular)
   {
     linear = 0.0;
     angular = -0.07;  // Turn Left
-
   }
   else if (values[5] < range_to_avoid)
   {
     linear = 0.0;
     angular = 0.07;  // Turn Right
-
   }
   else if (values[2] < range_to_avoid)
   {
-    linear = 0;
+    linear = 0.0;
     angular = -0.07;  // Turn Left
-
   }
   else if (values[3] < range_to_avoid)
   {
-    linear = 0;
+    linear = 0.0;
     angular = 0.07;  // Turn Right
-
   }
   else
   {
     linear = 0.05;  // Move Straight
-    angular = 0;
-
+    angular = 0.0;
   }
 }
 
@@ -178,25 +167,24 @@ void irSensorCLeftCallback(const std_msgs::Float32::ConstPtr& msg)
 }
 
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
   // Initial Variables
   std::string pheeno_name;
 
+  // Parse inputs
+  CommandLineParser cml_parser(argc, argv);
+
   // Parse input arguments for Pheeno name.
-  if (argc == 1)
+  if (cml_parser["-n"])
   {
-    ROS_ERROR("Need to provide Pheeno number!");
-  }
-  else if (argc > 2)
-  {
-    ROS_ERROR("Too many arguments!");
+    std::string pheeno_number = cml_parser("-n");
+    pheeno_name = "/pheeno_" + pheeno_number;
   }
   else
   {
-    std::string pheeno_number(argv[1], argc);
-    pheeno_name = "/pheeno_" + pheeno_number;
+    ROS_ERROR("Need to provide Pheeno number!");
   }
+
 
   // Initializing ROS node
   ros::init(argc, argv, "obstacle_avoidance_node");

@@ -17,7 +17,7 @@
   </include>
 
   <!-- URDF XML Pheeno robot description loaded on the parameter server. -->
-  <param name="robot_description" command="$(find xacro)/xacro.py '$(find pheeno_ros_sim)/urdf/pheeno_with_camera.xacro'"/>
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find pheeno_ros_sim)/urdf/pheeno.xacro'"/>
 
   <!-- Start Joint State Publisher -->
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"></node>
@@ -30,10 +30,10 @@
   <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model pheeno_01 -param robot_description -robot_namespace pheeno_01"/>
 
-  <!-- Run Python script that will determine random movement and obstacle avoidance for all agents. -->
-  <!--<node name="pheeno_obstacle_avoidance_1" pkg="pheeno_ros_sim" type="obstacle_avoidance.py" args="-n 01"/>-->
+  <!-- Run python script that will determine random movement and obstacle avoidance for all agents. -->
+  <!-- <node name="pheeno_obstacle_avoidance_1" pkg="pheeno_ros_sim" type="obstacle_avoidance.py" args="-n 01"/> -->
 
   <!-- Run C++ nodes that will determine random movement and obstacle avoidance for all agents. -->
-  <node name="pheeno_obstacle_avoidance_1" pkg="pheeno_ros_sim" type="obstacle_avoidance" args="-n 01"/>
+  <node name="pheeno_obstacle_avoidance_1" pkg="pheeno_ros_sim" type="obstacle_avoidance" output="screen" args="-n 01"/>
 
 </launch>

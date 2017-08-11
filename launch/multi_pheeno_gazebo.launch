@@ -29,23 +29,15 @@
 
   <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
   <node name="urdf_spawner_1" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x 1 -y 0 -z 0 -model pheeno_01 -param robot_description -robot_namespace pheeno_01"/>
-
   <node name="urdf_spawner_2" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x 0 -y 0 -z 0 -model pheeno_02 -param robot_description -robot_namespace pheeno_02"/>
-
   <node name="urdf_spawner_3" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x 0 -y -1 -z 0 -model pheeno_03 -param robot_description -robot_namespace pheeno_03"/>
-
   <node name="urdf_spawner_4" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x 0 -y 1 -z 0 -model pheeno_04 -param robot_description -robot_namespace pheeno_04"/>
-
   <node name="urdf_spawner_5" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x -1 -y 0 -z 0 -model pheeno_05 -param robot_description -robot_namespace pheeno_05"/>
 
   <!-- <node name="urdf_spawner_6" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x 2 -y 0 -z 0 -model pheeno_06 -param robot_description -robot_namespace pheeno_06"/> -->
-
   <!-- <node name="urdf_spawner_7" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x -2 -y -2 -z 0 -model pheeno_07 -param robot_description -robot_namespace pheeno_07"/> -->
-
   <!-- <node name="urdf_spawner_8" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x 0 -y -2 -z 0 -model pheeno_08 -param robot_description -robot_namespace pheeno_08"/> -->
-
   <!-- <node name="urdf_spawner_9" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x 0 -y 2 -z 0 -model pheeno_09 -param robot_description -robot_namespace pheeno_09"/> -->
-
   <!-- <node name="urdf_spawner_10" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x -2 -y 0 -z 0 -model pheeno_10 -param robot_description -robot_namespace pheeno_10"/> -->
 
 </launch>
