@@ -31,6 +31,6 @@
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model pheeno_01 -param robot_description -robot_namespace pheeno_01"/>
 
   <!-- Enable a testbed to be generated at the same time. -->
-  <!-- <include file="$(find pheeno_ros_sim)/launch/testbed.launch"/> -->
+   <include file="$(find pheeno_ros_sim)/launch/testbed.launch"/>
 
 </launch>
