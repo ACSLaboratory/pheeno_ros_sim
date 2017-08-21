@@ -1,12 +1,15 @@
 <?xml version="1.0" ?>
 <sdf version="1.4">
-    <model name="testbed_side">
+    <model name="testbed">
         <static>true</static> <!-- Wall will be immovable -->
-        <link name="side_1">
-            <pose>1.068 0 0.123 0 0 0</pose>
-            <visual>
-                <material name="Orange">
-                    <color rgba="1.0 0.65 0.3 1.0"/>
+        <link name="link_1">
+            <pose>1.068 0 0.124 0 0 0</pose>
+            <visual name="visual">
+                <material>
+                    <ambient>1 0 0 1</ambient>
+                    <diffuse>1 0 0 1</diffuse>
+                    <specular>0.1 0.1 0.1 1</specular>
+                    <emissive>0 0 0 0</emissive>
                 </material>
                 <geometry>
                     <box>
@@ -34,11 +37,14 @@
             </collision>
         </link>
 
-        <link name="side_2">
-            <pose>0 1.068 0.123 0 0 1.57</pose>
-            <visual>
-                <material name="Green">
-                    <color rgba="0.0 1.0 0.0 1.0"/>
+        <link name="link_2">
+            <pose>0 1.068 0.124 0 0 1.57</pose>
+            <visual name="visual">
+                <material>
+                    <ambient>1 0 0 1</ambient>
+                    <diffuse>1 0 0 1</diffuse>
+                    <specular>0.1 0.1 0.1 1</specular>
+                    <emissive>0 0 0 0</emissive>
                 </material>
                 <geometry>
                     <box>
@@ -66,11 +72,14 @@
             </collision>
         </link>
 
-        <link name="side_3">
-            <pose>-1.068 0 0.123 0 0 0</pose>
-            <visual>
-                <material name="Cyan">
-                    <color rgba="0.0 1.0 1.0 1.0"/>
+        <link name="link_3">
+            <pose>-1.068 0 0.124 0 0 0</pose>
+            <visual name="visual">
+                <material>
+                    <ambient>1 0 0 1</ambient>
+                    <diffuse>1 0 0 1</diffuse>
+                    <specular>0.1 0.1 0.1 1</specular>
+                    <emissive>0 0 0 0</emissive>
                 </material>
                 <geometry>
                     <box>
@@ -98,11 +107,14 @@
             </collision>
         </link>
 
-        <link name="side_4">
-            <pose>0 -1.068 0.123 0 0 -1.57</pose>
-            <visual>
-                <material name="Purple">
-                    <color rgba="0.55 0.0 0.55 1.0"/>
+        <link name="link_4">
+            <pose>0 -1.068 0.124 0 0 -1.57</pose>
+            <visual name="visual">
+                <material>
+                    <ambient>1 0 0 1</ambient>
+                    <diffuse>1 0 0 1</diffuse>
+                    <specular>0.1 0.1 0.1 1</specular>
+                    <emissive>0 0 0 0</emissive>
                 </material>
                 <geometry>
                     <box>
