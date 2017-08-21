@@ -1,39 +1,39 @@
 <launch>
+    <!-- Args for use later -->
+    <arg name="paused" default="false"/>
+    <arg name="use_sim_time" default="true"/>
+    <arg name="gui" default="true"/>
+    <arg name="headless" default="false"/>
+    <arg name="debug" default="false"/>
 
-  <!-- Args for use later -->
-  <arg name="paused" default="false"/>
-  <arg name="use_sim_time" default="true"/>
-  <arg name="gui" default="true"/>
-  <arg name="headless" default="false"/>
-  <arg name="debug" default="false"/>
+    <!-- To use an empty world, keep the file as is. If you would like a small boundary or testbed, comment line 10 and uncomment line 11. -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <!-- <include file="$(find pheeno_ros_sim)/launch/testbed.launch"> -->
+        <arg name="debug" value="$(arg debug)"/>
+        <arg name="gui" value="$(arg gui)"/>
+        <arg name="paused" value="$(arg paused)"/>
+        <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+        <arg name="headless" value="$(arg headless)"/>
+    </include>
 
-  <!-- We resume the logic in empty_world.launch -->
-  <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="debug" value="$(arg debug)"/>
-    <arg name="gui" value="$(arg gui)"/>
-    <arg name="paused" value="$(arg paused)"/>
-    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
-    <arg name="headless" value="$(arg headless)"/>
-  </include>
+    <!-- URDF XML Pheeno robot description loaded on the parameter server. -->
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find pheeno_ros_sim)/urdf/pheeno.xacro'"/>
 
-  <!-- URDF XML Pheeno robot description loaded on the parameter server. -->
-  <param name="robot_description" command="$(find xacro)/xacro.py '$(find pheeno_ros_sim)/urdf/pheeno.xacro'"/>
+    <!-- Start Joint State Publisher -->
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"></node>
 
-  <!-- Start Joint State Publisher -->
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"></node>
+    <!-- Start Robot State Publisher -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+        <param name="publish_frequency" type="double" value="50.0"/>
+    </node>
 
-  <!-- Start Robot State Publisher -->
-  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
-    <param name="publish_frequency" type="double" value="50.0"/>
-  </node>
+    <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+    <node name="urdf_spawner_1" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x 1 -y 0 -z 0 -model pheeno_01 -param robot_description -robot_namespace pheeno_01"/>
 
-  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
-  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model pheeno_01 -param robot_description -robot_namespace pheeno_01"/>
+    <!-- Run python script that will determine random movement and obstacle avoidance for all agents. -->
+    <!--<node name="pheeno_obstacle_avoidance_1" pkg="pheeno_ros_sim" type="obstacle_avoidance.py" args="-n 01"/>-->
 
-  <!-- Run python script that will determine random movement and obstacle avoidance for all agents. -->
-  <!-- <node name="pheeno_obstacle_avoidance_1" pkg="pheeno_ros_sim" type="obstacle_avoidance.py" args="-n 01"/> -->
-
-  <!-- Run C++ nodes that will determine random movement and obstacle avoidance for all agents. -->
-  <node name="pheeno_obstacle_avoidance_1" pkg="pheeno_ros_sim" type="obstacle_avoidance" output="screen" args="-n 01"/>
+    <!-- Run C++ nodes that will determine random movement and obstacle avoidance for all agents. -->
+    <node name="pheeno_obstacle_avoidance_1" pkg="pheeno_ros_sim" type="obstacle_avoidance_sim" args="-n 01"/>
 
 </launch>

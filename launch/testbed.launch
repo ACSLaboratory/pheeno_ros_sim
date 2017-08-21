@@ -1,23 +1,35 @@
 <launch>
-  <!-- URDF XML Testbed loaded on the parameter server. -->
-  <param name="testbed_side_1_description" command="$(find xacro)/xacro.py '$(find pheeno_ros_sim)/urdf/testbed_side_wall_1.xacro'"/>
-  <param name="testbed_side_2_description" command="$(find xacro)/xacro.py '$(find pheeno_ros_sim)/urdf/testbed_side_wall_2.xacro'"/>
-  <param name="testbed_side_3_description" command="$(find xacro)/xacro.py '$(find pheeno_ros_sim)/urdf/testbed_side_wall_3.xacro'"/>
-  <param name="testbed_side_4_description" command="$(find xacro)/xacro.py '$(find pheeno_ros_sim)/urdf/testbed_side_wall_4.xacro'"/>
+    <!-- These are the arguments you can pass this launch file, for example paused:=true -->
+    <arg name="paused" default="false"/>
+    <arg name="use_sim_time" default="true"/>
+    <arg name="extra_gazebo_args" default=""/>
+    <arg name="gui" default="true"/>
+    <arg name="headless" default="false"/>
+    <arg name="debug" default="false"/>
+    <arg name="physics" default="ode"/>
+    <arg name="verbose" default="false"/>
+    <arg name="world_name" default="$(find pheeno_ros_sim)/worlds/testbed.world"/>
 
+    <group if="$(arg use_sim_time)">
+        <param name="/use_sim_time" value="true"/>
+    </group>
 
+    <!-- set command arguments -->
+    <arg unless="$(arg paused)" name="command_arg1" value=""/>
+    <arg if="$(arg paused)" name="command_arg1" value="-u"/>
+    <arg unless="$(arg headless)" name="command_arg2" value=""/>
+    <arg if="$(arg headless)" name="command_arg2" value="-r"/>
+    <arg unless="$(arg verbose)" name="command_arg3" value=""/>
+    <arg if="$(arg verbose)" name="command_arg3" value="--verbose"/>
+    <arg unless="$(arg debug)" name="script_type" value="gzserver"/>
+    <arg if="$(arg debug)" name="script_type" value="debug"/>
 
-  <!-- Run a python script to the send a service call to gazebo_ros to spawn the URDF testbed -->
-  <!-- <node name="urdf_testbed_side_1_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x 1.068 -y 0 -z 0 -model testbed_1 -param testbed_side_1_description"/>
-  <node name="urdf_testbed_side_2_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x 0 -y 1.068 -z 0 -model testbed_2 -param testbed_side_2_description"/>
-  <node name="urdf_testbed_side_3_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x -1.068 -y 0 -z 0 -model testbed_3 -param testbed_side_3_description"/>
-  <node name="urdf_testbed_side_4_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x 0 -y -1.068 -z 0 -model testbed_4 -param testbed_side_4_description"/> -->
+    <!-- Start gazebo server -->
+    <node name="gazebo" pkg="gazebo_ros" type="$(arg script_type)" respawn="false" output="screen" args="$(arg command_arg1) $(arg command_arg2) $(arg command_arg3) -e $(arg physics) $(arg extra_gazebo_args) $(arg world_name)"/>
 
-  <node name="urdf_testbed_side_1_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x 0 -y 0 -z 0 -model testbed_1 -param testbed_side_1_description"/>
-  <node name="urdf_testbed_side_2_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x 0 -y 0 -z 0 -model testbed_2 -param testbed_side_2_description"/>
-  <node name="urdf_testbed_side_3_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x 0 -y 0 -z 0 -model testbed_3 -param testbed_side_3_description"/>
-  <node name="urdf_testbed_side_4_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x 0 -y 0 -z 0 -model testbed_4 -param testbed_side_4_description"/>
-
-  <!-- HAVE TO SET X Y Z MANUALLY AND MAKE X Y Z IN XACRO FILE 0 0 0 -->
+    <!-- Start gazebo client -->
+    <group if="$(arg gui)">
+        <node name="gazebo_gui" pkg="gazebo_ros" type="gzclient" respawn="false" output="screen"/>
+    </group>
 
 </launch>
