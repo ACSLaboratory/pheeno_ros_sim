@@ -2,7 +2,7 @@
   <arg name="pheeno" />
 
   <!-- Parsing xacro and setting robot_description paramter -->
-  <param name="robot_description" command="$(find xacro)/xacro.py $(find pheeno_ros_sim)/urdf/pheeno.xacro"/>
+  <param name="robot_description" command="$(find xacro)/xacro.py $(find pheeno_ros_sim)/urdf/pheeno_v1/pheeno.xacro"/>
 
   <!-- Setting gui parameter to true for display joint slider -->
   <param name="use_gui" value="true"/>

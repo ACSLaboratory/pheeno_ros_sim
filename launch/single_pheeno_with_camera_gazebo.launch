@@ -17,7 +17,7 @@
   </include>
 
   <!-- URDF XML Pheeno robot description loaded on the parameter server. -->
-  <param name="robot_description" command="$(find xacro)/xacro.py '$(find pheeno_ros_sim)/urdf/pheeno_with_camera.xacro'"/>
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find pheeno_ros_sim)/urdf/pheeno_v1/pheeno_with_camera.xacro'"/>
 
   <!-- Start Joint State Publisher -->
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"></node>
