@@ -6,8 +6,9 @@
   <arg name="headless" default="false"/>
   <arg name="debug" default="false"/>
 
-  <!-- We resume the logic in empty_world.launch -->
+  <!-- To use an empty world, keep the file as is. If you would like a small boundary or testbed, comment line 10 and uncomment line 11. -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
+  <!-- <include file="$(find pheeno_ros_sim)/launch/testbed.launch"> -->
     <arg name="debug" value="$(arg debug)"/>
     <arg name="gui" value="$(arg gui)"/>
     <arg name="paused" value="$(arg paused)"/>
@@ -31,9 +32,9 @@
   <node name="urdf_spawner_2" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x 0 -y 0 -z 0 -model pheeno_02 -param robot_description -robot_namespace pheeno_02"/>
   <node name="urdf_spawner_3" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x 0 -y -1 -z 0 -model pheeno_03 -param robot_description -robot_namespace pheeno_03"/>
   <node name="urdf_spawner_4" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x 0 -y 1 -z 0 -model pheeno_04 -param robot_description -robot_namespace pheeno_04"/>
-  <node name="urdf_spawner_5" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x -1 -y 0 -z 0 -model pheeno_05 -param robot_description -robot_namespace pheeno_05"/>
+  <node name="urdf_spawner_5" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x -1 -y 0 -z 0 -model pheeno_05 -param robot_description -robot_namespace pheeno_05"/> -->
 
-  <!-- Run Python script that will determine random movement and obstacle avoidance for all agents. -->
+  <!-- Run python script that will determine random movement and obstacle avoidance for all agents. -->
   <!--<node name="pheeno_obstacle_avoidance_1" pkg="pheeno_ros_sim" type="obstacle_avoidance.py" args="-n 01"/>-->
   <!--<node name="pheeno_obstacle_avoidance_2" pkg="pheeno_ros_sim" type="obstacle_avoidance.py" args="-n 02"/>-->
   <!--<node name="pheeno_obstacle_avoidance_3" pkg="pheeno_ros_sim" type="obstacle_avoidance.py" args="-n 03"/>-->
