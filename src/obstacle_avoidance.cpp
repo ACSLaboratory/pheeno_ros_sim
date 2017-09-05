@@ -2,16 +2,12 @@
 #include "std_msgs/Float32.h"
 #include "geometry_msgs/Twist.h"
 #include "command_line_parser.h"
-
-
-// Global Variables
-std::vector<double> g_sensor_values(6);
+#include "sensor_listener.h"
 
 double randomTurn()
 {
   return rand() % 10 + 1 <= 5 ? -0.07 : 0.07;
 }
-
 
 void avoidObstacles(std::vector<double> values, double& linear, double& angular, double random_turn_value)
 {
@@ -68,7 +64,6 @@ void avoidObstacles(std::vector<double> values, double& linear, double& angular,
   }
 }
 
-
 void avoidObstacles(std::vector<double> values, double& linear, double& angular)
 {
   double range_to_avoid = 20.0;
@@ -124,49 +119,6 @@ void avoidObstacles(std::vector<double> values, double& linear, double& angular)
   }
 }
 
-
-void irSensorCenterCallback(const std_msgs::Float32::ConstPtr& msg)
-{
-  // ROS_INFO("Received Center IR Sensor Value [%d]", msg->data);
-  g_sensor_values[0] = msg->data;
-}
-
-
-void irSensorBackCallback(const std_msgs::Float32::ConstPtr& msg)
-{
-  // ROS_INFO("Received Back IR Sensor Value [%d]", msg->data);
-  g_sensor_values[1] = msg->data;
-}
-
-
-void irSensorRightCallback(const std_msgs::Float32::ConstPtr& msg)
-{
-  // ROS_INFO("Received Right IR Sensor Value [%d]", msg->data);
-  g_sensor_values[2] = msg->data;
-}
-
-
-void irSensorLeftCallback(const std_msgs::Float32::ConstPtr& msg)
-{
-  // ROS_INFO("Received Left IR Sensor Value [%d]", msg->data);
-  g_sensor_values[3] = msg->data;
-}
-
-
-void irSensorCRightCallback(const std_msgs::Float32::ConstPtr& msg)
-{
-  // ROS_INFO("Received Center-Right IR Sensor Value[%d]", msg->data);
-  g_sensor_values[4] = msg->data;
-}
-
-
-void irSensorCLeftCallback(const std_msgs::Float32::ConstPtr& msg)
-{
-  // ROS_INFO("Received Center-Left IR Sensor Value [%d]", msg->data);
-  g_sensor_values[5] = msg->data;
-}
-
-
 int main(int argc, char **argv) {
   // Initial Variables
   std::string pheeno_name;
@@ -189,17 +141,18 @@ int main(int argc, char **argv) {
   // Initializing ROS node
   ros::init(argc, argv, "obstacle_avoidance_node");
 
-  // Created a node handle object
+  // Created a node handle object and sensor listener
   ros::NodeHandle node_obj;
+  SensorListener sensor_listener;
 
   // Create Publishers and Subscribers
   ros::Publisher pub_cmd_vel = node_obj.advertise<geometry_msgs::Twist>(pheeno_name + "/cmd_vel", 100);
-  ros::Subscriber sub_ir_center = node_obj.subscribe(pheeno_name + "/scan_center", 10, irSensorCenterCallback);
-  ros::Subscriber sub_ir_back = node_obj.subscribe(pheeno_name + "/scan_back", 10, irSensorBackCallback);
-  ros::Subscriber sub_ir_right = node_obj.subscribe(pheeno_name + "/scan_right", 10, irSensorRightCallback);
-  ros::Subscriber sub_ir_left = node_obj.subscribe(pheeno_name + "/scan_left", 10, irSensorLeftCallback);
-  ros::Subscriber sub_ir_cr = node_obj.subscribe(pheeno_name + "/scan_cr", 10, irSensorCRightCallback);
-  ros::Subscriber sub_ir_cl = node_obj.subscribe(pheeno_name + "/scan_cl", 10, irSensorCLeftCallback);
+  ros::Subscriber sub_ir_center = node_obj.subscribe(pheeno_name + "/scan_center", 10, &SensorListener::irSensorCenterCallback, &sensor_listener);
+  ros::Subscriber sub_ir_back = node_obj.subscribe(pheeno_name + "/scan_back", 10, &SensorListener::irSensorBackCallback, &sensor_listener);
+  ros::Subscriber sub_ir_right = node_obj.subscribe(pheeno_name + "/scan_right", 10, &SensorListener::irSensorRightCallback, &sensor_listener);
+  ros::Subscriber sub_ir_left = node_obj.subscribe(pheeno_name + "/scan_left", 10, &SensorListener::irSensorLeftCallback, &sensor_listener);
+  ros::Subscriber sub_ir_cr = node_obj.subscribe(pheeno_name + "/scan_cr", 10, &SensorListener::irSensorCRightCallback, &sensor_listener);
+  ros::Subscriber sub_ir_cl = node_obj.subscribe(pheeno_name + "/scan_cl", 10, &SensorListener::irSensorCLeftCallback, &sensor_listener);
 
   // ROS Rate loop
   ros::Rate loop_rate(10);
@@ -218,12 +171,12 @@ int main(int argc, char **argv) {
     current_duration = ros::Time::now().toSec() - saved_time;
 
     if (current_duration <= 10.0) {
-      avoidObstacles(g_sensor_values, linear, angular, turn_direction);
+      avoidObstacles(sensor_listener.ir_sensor_values_, linear, angular, turn_direction);
       cmd_vel_msg.linear.x = linear;
       cmd_vel_msg.angular.z = angular;
 
     } else if (current_duration < 20.0) {
-      avoidObstacles(g_sensor_values, linear, angular);
+      avoidObstacles(sensor_listener.ir_sensor_values_, linear, angular);
       cmd_vel_msg.linear.x = linear;
       cmd_vel_msg.angular.z = angular;
 
