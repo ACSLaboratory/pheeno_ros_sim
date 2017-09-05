@@ -120,7 +120,7 @@ include_directories(
 ADD_LIBRARY(gazebo_ros_ir_sensor SHARED src/gazebo_ros_ir_sensor.cpp)
 TARGET_LINK_LIBRARIES(gazebo_ros_ir_sensor ${catkin_LIBRARIES} ${boost_LIBRARIES} ${GAZEBO_LIBRARIES} RayPlugin)
 
-ADD_EXECUTABLE(obstacle_avoidance_sim src/command_line_parser.cpp src/obstacle_avoidance.cpp)
+ADD_EXECUTABLE(obstacle_avoidance_sim src/command_line_parser.cpp src/sensor_listener.cpp src/obstacle_avoidance.cpp)
 TARGET_LINK_LIBRARIES(obstacle_avoidance_sim ${catkin_LIBRARIES})
 
 ADD_EXECUTABLE(random_walk_sim src/command_line_parser.cpp src/random_walk.cpp)
