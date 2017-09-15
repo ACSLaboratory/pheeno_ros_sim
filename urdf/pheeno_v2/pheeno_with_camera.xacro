@@ -27,57 +27,50 @@
   <xacro:property name="PI" value="3.14159265358979"/>
 
   <!-- Property List (ff = fixed frame) -->
-  <xacro:property name="base_plate_height" value="0.003"/>
-  <!-- m -->
-  <xacro:property name="base_plate_radius" value="0.0635"/>
-  <!-- m -->
-  <xacro:property name="base_plate_mass" value=".035"/>
-  <!-- kg -->
-  <xacro:property name="base_plate_ff_x" value="0"/>
-  <!-- m -->
-  <xacro:property name="base_plate_ff_y" value="0"/>
-  <!-- m -->
-  <xacro:property name="base_plate_ff_z" value="0"/>
-  <!-- m -->
-  <xacro:property name="base_plate_ff_roll" value="0"/>
-  <!-- rad -->
-  <xacro:property name="base_plate_ff_pitch" value="0"/>
-  <!-- rad -->
-  <xacro:property name="base_plate_ff_yaw" value="0"/>
-  <!-- rad -->
+  <xacro:property name="base_plate_height" value="0.0025"/> <!-- m -->
+  <xacro:property name="base_plate_radius" value="0.0635"/> <!-- m -->
+  <xacro:property name="base_plate_mass" value=".035"/> <!-- kg -->
+  <xacro:property name="base_plate_ff_x" value="0"/> <!-- m -->
+  <xacro:property name="base_plate_ff_y" value="0"/> <!-- m -->
+  <xacro:property name="base_plate_ff_z" value="0"/> <!-- m -->
+  <xacro:property name="base_plate_ff_roll" value="0"/> <!-- rad -->
+  <xacro:property name="base_plate_ff_pitch" value="0"/> <!-- rad -->
+  <xacro:property name="base_plate_ff_yaw" value="0"/> <!-- rad -->
 
-  <xacro:property name="pcb_plate_height" value="0.003"/>
+  <xacro:property name="pcb_plate_height" value="0.0025"/>
   <xacro:property name="pcb_plate_radius" value="0.0635"/>
   <xacro:property name="pcb_plate_mass" value="0.085"/>
   <xacro:property name="pcb_plate_ff_x" value="0"/>
   <xacro:property name="pcb_plate_ff_y" value="0"/>
-  <xacro:property name="pcb_plate_ff_z" value="0.041"/>
+  <xacro:property name="pcb_plate_ff_z" value="0.0215"/>
   <xacro:property name="pcb_plate_ff_roll" value="0"/>
   <xacro:property name="pcb_plate_ff_pitch" value="0"/>
   <xacro:property name="pcb_plate_ff_yaw" value="0"/>
 
-  <xacro:property name="top_plate_height" value="0.003"/>
+  <xacro:property name="top_plate_height" value="0.0025"/>
   <xacro:property name="top_plate_radius" value="0.0635"/>
   <xacro:property name="top_plate_mass" value="0.035"/>
   <xacro:property name="top_plate_ff_x" value="0"/>
   <xacro:property name="top_plate_ff_y" value="0"/>
-  <xacro:property name="top_plate_ff_z" value="0.0840"/>
+  <xacro:property name="top_plate_ff_z" value="0.0723"/>
   <xacro:property name="top_plate_ff_roll" value="0"/>
   <xacro:property name="top_plate_ff_pitch" value="0"/>
   <xacro:property name="top_plate_ff_yaw" value="0"/>
 
   <!-- Pillar Bottom -->
+  <xacro:property name="bottom_pillar_length" value="0.019"/>
   <xacro:property name="bottom_pillar_x" value="0"/>
   <xacro:property name="bottom_pillar_y" value="0"/>
-  <xacro:property name="bottom_pillar_z" value="0.02"/>
+  <xacro:property name="bottom_pillar_z" value="0.0108"/> <!-- 0.0183 -->
   <xacro:property name="bottom_pillar_roll" value="0"/>
   <xacro:property name="bottom_pillar_pitch" value="0"/>
   <xacro:property name="bottom_pillar_yaw" value="0"/>
 
   <!-- Pillar Top -->
+  <xacro:property name="top_pillar_length" value="0.0483"/>
   <xacro:property name="top_pillar_x" value="0"/>
   <xacro:property name="top_pillar_y" value="0"/>
-  <xacro:property name="top_pillar_z" value="0.0625"/>
+  <xacro:property name="top_pillar_z" value="0.047"/> <!-- 0.0668 -->
   <xacro:property name="top_pillar_roll" value="0"/>
   <xacro:property name="top_pillar_pitch" value="0"/>
   <xacro:property name="top_pillar_yaw" value="0"/>
@@ -92,43 +85,42 @@
   <xacro:property name="motor_plank_ff_pitch" value="0"/>
   <xacro:property name="motor_plank_ff_yaw" value="${PI / 2}"/>
 
-  <xacro:property name="caster_plank_length" value="0.095"/>
-  <xacro:property name="caster_plank_width" value="0.032"/>
-  <xacro:property name="caster_plank_height" value="0.003"/>
-  <xacro:property name="caster_plank_ff_x" value="0.0151"/>
-  <xacro:property name="caster_plank_ff_y" value="0"/>
-  <xacro:property name="caster_plank_ff_z" value="-0.003"/>
-  <xacro:property name="caster_plank_ff_roll" value="0"/>
-  <xacro:property name="caster_plank_ff_pitch" value="0"/>
-  <xacro:property name="caster_plank_ff_yaw" value="0"/>
+  <xacro:property name="battery_tray_length" value="0.117"/>
+  <xacro:property name="battery_tray_width" value="0.042"/>
+  <xacro:property name="battery_tray_height" value="0.0305"/>
+  <xacro:property name="battery_tray_ff_x" value="0"/> <!-- 0.151 -->
+  <xacro:property name="battery_tray_ff_y" value="0"/>
+  <xacro:property name="battery_tray_ff_z" value="-0.0165"/>
+  <xacro:property name="battery_tray_ff_roll" value="0"/>
+  <xacro:property name="battery_tray_ff_pitch" value="0"/>
+  <xacro:property name="battery_tray_ff_yaw" value="0"/>
 
-  <xacro:property name="motor_base_R_length" value="0.025"/>
-  <xacro:property name="motor_base_R_width" value="0.03"/>
-  <xacro:property name="motor_base_R_height" value="0.015"/>
-  <xacro:property name="motor_base_R_ff_x" value="-0.045"/>
-  <xacro:property name="motor_base_R_ff_y" value="0.045"/>
-  <xacro:property name="motor_base_R_ff_z" value="-0.0105"/>
+  <xacro:property name="motor_base_R_length" value="0.04"/>
+  <xacro:property name="motor_base_R_width" value="0.033"/>
+  <xacro:property name="motor_base_R_height" value="0.038"/>
+  <xacro:property name="motor_base_R_ff_x" value="-0.0343"/>
+  <xacro:property name="motor_base_R_ff_y" value="0.038"/>
+  <xacro:property name="motor_base_R_ff_z" value="-0.0203"/>
   <xacro:property name="motor_base_R_ff_roll" value="0"/>
   <xacro:property name="motor_base_R_ff_pitch" value="0"/>
   <xacro:property name="motor_base_R_ff_yaw" value="0"/>
 
-  <xacro:property name="motor_base_L_length" value="0.025"/>
-  <xacro:property name="motor_base_L_width" value="0.03"/>
-  <xacro:property name="motor_base_L_height" value="0.015"/>
-  <xacro:property name="motor_base_L_ff_x" value="-0.045"/>
-  <xacro:property name="motor_base_L_ff_y" value="-0.045"/>
-  <xacro:property name="motor_base_L_ff_z" value="-0.0105"/>
+  <xacro:property name="motor_base_L_length" value="0.04"/>
+  <xacro:property name="motor_base_L_width" value="0.033"/>
+  <xacro:property name="motor_base_L_height" value="0.038"/>
+  <xacro:property name="motor_base_L_ff_x" value="-0.0343"/>
+  <xacro:property name="motor_base_L_ff_y" value="-0.038"/>
+  <xacro:property name="motor_base_L_ff_z" value="-0.0203"/>
   <xacro:property name="motor_base_L_ff_roll" value="0"/>
   <xacro:property name="motor_base_L_ff_pitch" value="0"/>
   <xacro:property name="motor_base_L_ff_yaw" value="0"/>
 
-  <xacro:property name="caster_base_length" value="0.012"/>
-  <xacro:property name="caster_base_width" value="0.012"/>
-  <xacro:property name="caster_base_height" value="0.010"/>
-  <xacro:property name="caster_base_ff_x" value="0.055"/>
+  <xacro:property name="caster_base_length" value="0.0305"/>
+  <xacro:property name="caster_base_width" value="0.0381"/>
+  <xacro:property name="caster_base_height" value="0.0305"/>
+  <xacro:property name="caster_base_ff_x" value="0.074"/>
   <xacro:property name="caster_base_ff_y" value="0"/>
-  <xacro:property name="caster_base_ff_z" value="-0.0095"/>
-  <!-- -0.0105 -->
+  <xacro:property name="caster_base_ff_z" value="-0.0165"/> <!-- -0.0105 -->
   <xacro:property name="caster_base_ff_roll" value="0"/>
   <xacro:property name="caster_base_ff_pitch" value="0"/>
   <xacro:property name="caster_base_ff_yaw" value="0"/>
@@ -137,69 +129,63 @@
   <xacro:property name="caster_radius" value="0.006"/>
   <xacro:property name="caster_ff_x" value="0"/>
   <xacro:property name="caster_ff_y" value="0"/>
-  <xacro:property name="caster_ff_z" value="-0.005"/>
+  <xacro:property name="caster_ff_z" value="-0.0153"/>
   <xacro:property name="caster_ff_roll" value="${-PI/2}"/>
   <xacro:property name="caster_ff_pitch" value="0"/>
   <xacro:property name="caster_ff_yaw" value="0"/>
 
   <xacro:property name="ir_sensor_center_x" value="0.05"/>
   <xacro:property name="ir_sensor_center_y" value="0"/>
-  <xacro:property name="ir_sensor_center_z" value="0.053"/>
-  <!-- 0.053 -->
+  <xacro:property name="ir_sensor_center_z" value="0.0322"/>
   <xacro:property name="ir_sensor_center_roll" value="0"/>
   <xacro:property name="ir_sensor_center_pitch" value="0"/>
-  <xacro:property name="ir_sensor_center_yaw" value="0"/>
+  <xacro:property name="ir_sensor_center_yaw" value="0"/> <!-- PI/2 -->
 
   <xacro:property name="ir_sensor_back_x" value="-0.05"/>
   <xacro:property name="ir_sensor_back_y" value="0"/>
-  <xacro:property name="ir_sensor_back_z" value="0.053"/>
+  <xacro:property name="ir_sensor_back_z" value="0.0322"/>
   <xacro:property name="ir_sensor_back_roll" value="0"/>
   <xacro:property name="ir_sensor_back_pitch" value="0"/>
-  <xacro:property name="ir_sensor_back_yaw" value="${PI}"/>
+  <xacro:property name="ir_sensor_back_yaw" value="${PI}"/> <!-- 3PI/2 -->
 
   <xacro:property name="ir_sensor_cr_x" value="0.0354"/>
   <xacro:property name="ir_sensor_cr_y" value="-0.0354"/>
-  <xacro:property name="ir_sensor_cr_z" value="0.053"/>
+  <xacro:property name="ir_sensor_cr_z" value="0.0322"/>
   <xacro:property name="ir_sensor_cr_roll" value="0"/>
   <xacro:property name="ir_sensor_cr_pitch" value="0"/>
   <xacro:property name="ir_sensor_cr_yaw" value="${-1 * PI / 4}"/>
 
   <xacro:property name="ir_sensor_cl_x" value="0.0354"/>
   <xacro:property name="ir_sensor_cl_y" value="0.0354"/>
-  <xacro:property name="ir_sensor_cl_z" value="0.053"/>
+  <xacro:property name="ir_sensor_cl_z" value="0.0322"/>
   <xacro:property name="ir_sensor_cl_roll" value="0"/>
   <xacro:property name="ir_sensor_cl_pitch" value="0"/>
   <xacro:property name="ir_sensor_cl_yaw" value="${PI / 4}"/>
 
   <xacro:property name="ir_sensor_right_x" value="0"/>
   <xacro:property name="ir_sensor_right_y" value="-0.05"/>
-  <xacro:property name="ir_sensor_right_z" value="0.053"/>
+  <xacro:property name="ir_sensor_right_z" value="0.0322"/>
   <xacro:property name="ir_sensor_right_roll" value="0"/>
   <xacro:property name="ir_sensor_right_pitch" value="0"/>
   <xacro:property name="ir_sensor_right_yaw" value="${-PI / 2}"/>
 
   <xacro:property name="ir_sensor_left_x" value="0"/>
   <xacro:property name="ir_sensor_left_y" value="0.05"/>
-  <xacro:property name="ir_sensor_left_z" value="0.053"/>
+  <xacro:property name="ir_sensor_left_z" value="0.0322"/>
   <xacro:property name="ir_sensor_left_roll" value="0"/>
   <xacro:property name="ir_sensor_left_pitch" value="0"/>
   <xacro:property name="ir_sensor_left_yaw" value="${PI / 2}"/>
 
   <xacro:property name="pi_cam_mass" value="0.005"/>
-  <xacro:property name="pi_cam_length" value="0.02"/>
-  <!-- 0.03 -->
-  <xacro:property name="pi_cam_width" value="0.02"/>
-  <!-- 0.005 -->
-  <xacro:property name="pi_cam_height" value="0.02"/>
-  <!-- 0.06 -->
-  <xacro:property name="pi_cam_x" value="0.05"/>
+  <xacro:property name="pi_cam_length" value="0.02"/> <!-- 0.03 -->
+  <xacro:property name="pi_cam_width" value="0.02"/> <!-- 0.005 -->
+  <xacro:property name="pi_cam_height" value="0.02"/> <!-- 0.06 -->
+  <xacro:property name="pi_cam_x" value="0.061"/>
   <xacro:property name="pi_cam_y" value="0"/>
-  <xacro:property name="pi_cam_z" value="0.112"/>
-  <xacro:property name="pi_cam_roll" value="0"/>
-  <!-- PI/8 -->
+  <xacro:property name="pi_cam_z" value="0.108"/>
+  <xacro:property name="pi_cam_roll" value="0"/> <!-- PI/8 -->
   <xacro:property name="pi_cam_pitch" value="${PI / 8}"/>
-  <xacro:property name="pi_cam_yaw" value="0"/>
-  <!-- PI/2 -->
+  <xacro:property name="pi_cam_yaw" value="0"/> <!-- PI/2 -->
 
   <!-- ########################## LINKS ################################ -->
 
@@ -224,7 +210,7 @@
   </gazebo>
 
   <joint name="base_footprint_joint" type="fixed">
-    <origin xyz="0 0 ${wheel_radius + .0055}" rpy="0 0 0"/>
+    <origin xyz="0 0 0.04318" rpy="0 0 0"/>
     <parent link="base_footprint"/>
     <child link="base_plate_link"/>
   </joint>
@@ -255,10 +241,10 @@
     <material>Gazebo/Red</material>
   </gazebo>
 
-  <joint name="base_link_to_caster_plank_joint" type="fixed">
+  <joint name="base_link_to_battery_tray_joint" type="fixed">
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <parent link="base_plate_link"/>
-    <child link="caster_plank_link"/>
+    <child link="battery_tray_link"/>
   </joint>
 
   <!-- PCB PLATE -->
@@ -310,56 +296,29 @@
   </link>
 
   <gazebo reference="top_plate_link">
-      <material>Gazebo/Red</material>
+    <material>Gazebo/Red</material>
   </gazebo>
 
   <!-- CASTER PLANK -->
-  <link name="caster_plank_link">
+  <link name="battery_tray_link">
     <visual>
       <material name="Red"/>
-      <origin xyz="${caster_plank_ff_x} ${caster_plank_ff_y} ${caster_plank_ff_z}" rpy="${caster_plank_ff_roll} ${caster_plank_ff_pitch} ${caster_plank_ff_yaw}"/>
+      <origin xyz="${battery_tray_ff_x} ${battery_tray_ff_y} ${battery_tray_ff_z}" rpy="${battery_tray_ff_roll} ${battery_tray_ff_pitch} ${battery_tray_ff_yaw}"/>
       <geometry>
-        <box size="${caster_plank_length} ${caster_plank_width} ${caster_plank_height}"/>
+        <box size="${battery_tray_length} ${battery_tray_width} ${battery_tray_height}"/>
       </geometry>
     </visual>
     <collision>
-      <origin xyz="${caster_plank_ff_x} ${caster_plank_ff_y} ${caster_plank_ff_z}" rpy="${caster_plank_ff_roll} ${caster_plank_ff_pitch} ${caster_plank_ff_yaw}"/>
+      <origin xyz="${battery_tray_ff_x} ${battery_tray_ff_y} ${battery_tray_ff_z}" rpy="${battery_tray_ff_roll} ${battery_tray_ff_pitch} ${battery_tray_ff_yaw}"/>
       <geometry>
-        <box size="${caster_plank_length} ${caster_plank_width} ${caster_plank_height}"/>
+        <box size="${battery_tray_length} ${battery_tray_width} ${battery_tray_height}"/>
       </geometry>
     </collision>
   </link>
 
-  <gazebo reference="caster_plank_link">
+  <gazebo reference="battery_tray_link">
     <material>Gazebo/Red</material>
   </gazebo>
-
-  <!-- MOTOR PLANK -->
-  <link name="motor_plank_link">
-    <visual>
-      <material name="Red"/>
-      <origin xyz="${motor_plank_ff_x} ${motor_plank_ff_y} ${motor_plank_ff_z}" rpy="${motor_plank_ff_roll} ${motor_plank_ff_pitch} ${motor_plank_ff_yaw}"/>
-      <geometry>
-        <box size="${motor_plank_length} ${motor_plank_width} ${motor_plank_height}"/>
-      </geometry>
-    </visual>
-    <collision>
-      <origin xyz="${motor_plank_ff_x} ${motor_plank_ff_y} ${motor_plank_ff_z}" rpy="${motor_plank_ff_roll} ${motor_plank_ff_pitch} ${motor_plank_ff_yaw}"/>
-      <geometry>
-        <box size="${motor_plank_length} ${motor_plank_width} ${motor_plank_height}"/>
-      </geometry>
-    </collision>
-  </link>
-
-  <gazebo reference="motor_plank_link">
-    <material>Gazebo/Red</material>
-  </gazebo>
-
-  <joint name="base_link_to_motor_plank_joint" type="fixed">
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-    <parent link="base_plate_link"/>
-    <child link="motor_plank_link"/>
-  </joint>
 
   <!-- MOTOR BASE R -->
   <link name="motor_base_R_link">
@@ -382,8 +341,8 @@
     <material>Gazebo/Red</material>
   </gazebo>
 
-  <joint name="motor_base_R_to_motor_plank_joint" type="fixed">
-    <parent link="motor_plank_link"/>
+  <joint name="motor_base_R_to_battery_tray_join" type="fixed">
+    <parent link="battery_tray_link"/>
     <child link="motor_base_R_link"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint>
@@ -409,15 +368,15 @@
     <material>Gazebo/Red</material>
   </gazebo>
 
-  <joint name="motor_base_L_to_motor_plank_joint" type="fixed">
-    <parent link="motor_plank_link"/>
+  <joint name="motor_base_L_to_battery_tray_joint" type="fixed">
+    <parent link="battery_tray_link"/>
     <child link="motor_base_L_link"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint>
 
   <!-- WHEELS -->
-  <wheel lr="right" parent="base_plate_link" translateX="-0.72" translateY="-1" translateZ="-0.5" flipY="1"/>
-  <wheel lr="left" parent="base_plate_link" translateX="-0.72" translateY="1" translateZ="-0.5" flipY="1"/>
+  <wheel lr="right" parent="base_plate_link" translateX="-0.72" translateY="-1" translateZ="-1" flipY="1"/>
+  <wheel lr="left" parent="base_plate_link" translateX="-0.72" translateY="1" translateZ="-1" flipY="1"/>
 
   <!-- CASTER BASE -->
   <link name="caster_base_link">
@@ -440,8 +399,8 @@
     <material>Gazebo/Red</material>
   </gazebo>
 
-  <joint name="caster_base_to_caster_plank_joint" type="fixed">
-    <parent link="caster_plank_link"/>
+  <joint name="caster_base_to_battery_tray_joint" type="fixed">
+    <parent link="battery_tray_link"/>
     <child link="caster_base_link"/>
     <origin xyz="${caster_base_ff_x} ${caster_base_ff_y} ${caster_base_ff_z}" rpy="${caster_base_ff_roll} ${caster_base_ff_pitch} ${caster_base_ff_yaw}"/>
   </joint>
@@ -480,9 +439,9 @@
   </joint>
 
   <!-- PILLARS -->
-  <pillar pos="bottom" x="${bottom_pillar_x}" y="${bottom_pillar_y}" z="${bottom_pillar_z}" roll="${bottom_pillar_roll}" pitch="${bottom_pillar_pitch}" yaw="${bottom_pillar_yaw}" par="base_plate_link" chi="pcb_plate_link"/>
+  <pillar pos="bottom" len="${bottom_pillar_length}" x="${bottom_pillar_x}" y="${bottom_pillar_y}" z="${bottom_pillar_z}" roll="${bottom_pillar_roll}" pitch="${bottom_pillar_pitch}" yaw="${bottom_pillar_yaw}" par="base_plate_link" chi="pcb_plate_link"/>
 
-  <pillar pos="top" x="${top_pillar_x}" y="${top_pillar_y}" z="${top_pillar_z}" roll="${top_pillar_roll}" pitch="${top_pillar_pitch}" yaw="${top_pillar_yaw}" par="pcb_plate_link" chi="top_plate_link"/>
+  <pillar pos="top" len="${top_pillar_length}" x="${top_pillar_x}" y="${top_pillar_y}" z="${top_pillar_z}" roll="${top_pillar_roll}" pitch="${top_pillar_pitch}" yaw="${top_pillar_yaw}" par="pcb_plate_link" chi="top_plate_link"/>
 
   <!-- IR SENSOR -->
   <ir_sensor pos="center" x="${ir_sensor_center_x}" y="${ir_sensor_center_y}" z="${ir_sensor_center_z}" roll="${ir_sensor_center_roll}" pitch="${ir_sensor_center_pitch}" yaw="${ir_sensor_center_yaw}"/>
