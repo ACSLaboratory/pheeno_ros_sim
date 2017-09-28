@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>pheeno_ros_sim</name>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
   <description>
     Gazebo simulation ROS package for Pheeno system!
   </description>
