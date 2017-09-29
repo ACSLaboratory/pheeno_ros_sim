@@ -6,6 +6,8 @@ find_package(catkin REQUIRED COMPONENTS
   actionlib
   actionlib_msgs
   urdf
+  xacro
+  rviz
   tf
   tf2_ros
   image_transport
