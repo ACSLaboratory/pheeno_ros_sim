@@ -15,6 +15,10 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   message_generation
+  gazebo_ros
+  gazebo_ros_control
+  gazebo_msgs
+  gazebo_plugins
 )
 
 # Boost and Gazebo
