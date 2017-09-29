@@ -9,9 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
   xacro
   rviz
   tf
-  tf2_ros
   image_transport
-  cv_bridge
   geometry_msgs
   roscpp
   rospy
