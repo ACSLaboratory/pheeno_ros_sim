@@ -2,6 +2,11 @@
 Changelog for package pheeno_ros_sim
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.1.2 (2017-09-29)
+------------------
+* Fixed buildfarm issue.
+* Contributors: zmk5
+
 0.1.1 (2017-09-28)
 ------------------
 * Initial release
