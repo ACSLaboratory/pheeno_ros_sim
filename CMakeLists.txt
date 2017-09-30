@@ -12,14 +12,16 @@ find_package(catkin REQUIRED COMPONENTS
   xacro
   rviz
   tf
-  tf2_ros
   image_transport
-  cv_bridge
   geometry_msgs
   roscpp
   rospy
   std_msgs
   message_generation
+  gazebo_ros
+  gazebo_ros_control
+  gazebo_msgs
+  gazebo_plugins
 )
 
 # Boost and Gazebo
