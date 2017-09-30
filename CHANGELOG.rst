@@ -2,6 +2,16 @@
 Changelog for package pheeno_ros_sim
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.1.4 (2017-09-29)
+------------------
+* Added more build requirements.
+* Contributors: zmk5
+
+0.1.3 (2017-09-29)
+------------------
+* Removed cv_bridge requirement.
+* Contributors: zmk5
+
 0.1.2 (2017-09-29)
 ------------------
 * Fixed buildfarm issue.
