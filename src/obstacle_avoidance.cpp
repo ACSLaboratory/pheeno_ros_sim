@@ -4,12 +4,15 @@
 #include "command_line_parser.h"
 #include "sensor_listener.h"
 
+float g_ANGULAR_SPEED = 1.2;
+float g_LINEAR_SPEED = 0.08;
+
 double randomTurn()
 {
-  return rand() % 10 + 1 <= 5 ? -0.07 : 0.07;
+  return rand() % 10 + 1 <= 5 ? (-1 * g_ANGULAR_SPEED) : g_ANGULAR_SPEED;
 }
 
-void avoidObstacles(std::vector<double> values, double& linear, double& angular, double random_turn_value)
+void avoidObstacles(std::vector<double> values, double& linear, double& angular, double& random_turn_value)
 {
   double range_to_avoid = 20.0;
   if (values[0] < range_to_avoid)
@@ -24,12 +27,12 @@ void avoidObstacles(std::vector<double> values, double& linear, double& angular,
     if (values[2] < values[3])
     {
       linear = 0.0;
-      angular = -0.07;  // Turn Left
+      angular = -1 * g_ANGULAR_SPEED;  // Turn Left
     }
     else
     {
       linear = 0.0;
-      angular = 0.07;  // Turn Right
+      angular = g_ANGULAR_SPEED;  // Turn Right
     }
   }
   else if (values[4] < range_to_avoid && values[5] < range_to_avoid)
@@ -40,27 +43,32 @@ void avoidObstacles(std::vector<double> values, double& linear, double& angular,
   else if (values[4] < range_to_avoid)
   {
     linear = 0.0;
-    angular = -0.07;  // Turn Left
+    angular = -1 * g_ANGULAR_SPEED;  // Turn Left
   }
   else if (values[5] < range_to_avoid)
   {
     linear = 0.0;
-    angular = 0.07;  // Turn Right
+    angular = g_ANGULAR_SPEED;  // Turn Right
   }
   else if (values[2] < range_to_avoid)
   {
     linear = 0;
-    angular = -0.07;  // Turn Left
+    angular = -1 * g_ANGULAR_SPEED;  // Turn Left
   }
   else if (values[3] < range_to_avoid)
   {
     linear = 0;
-    angular = 0.07;  // Turn Right
+    angular = g_ANGULAR_SPEED;  // Turn Right
   }
   else
   {
     linear = 0.0;
     angular = random_turn_value;
+  }
+
+  if (angular != random_turn_value)
+  {
+    random_turn_value = angular;
   }
 }
 
@@ -79,12 +87,12 @@ void avoidObstacles(std::vector<double> values, double& linear, double& angular)
     if (values[2] < values[3])
     {
       linear = 0.0;
-      angular = -0.07;  // Turn Left
+      angular = -1 * g_ANGULAR_SPEED;  // Turn Left
     }
     else
     {
       linear = 0.0;
-      angular = 0.07;  // Turn Right
+      angular = g_ANGULAR_SPEED;  // Turn Right
     }
   }
   else if (values[4] < range_to_avoid && values[5] < range_to_avoid)
@@ -95,26 +103,26 @@ void avoidObstacles(std::vector<double> values, double& linear, double& angular)
   else if (values[4] < range_to_avoid)
   {
     linear = 0.0;
-    angular = -0.07;  // Turn Left
+    angular = -1 * g_ANGULAR_SPEED;  // Turn Left
   }
   else if (values[5] < range_to_avoid)
   {
     linear = 0.0;
-    angular = 0.07;  // Turn Right
+    angular = g_ANGULAR_SPEED;  // Turn Right
   }
   else if (values[2] < range_to_avoid)
   {
     linear = 0.0;
-    angular = -0.07;  // Turn Left
+    angular = -1 * g_ANGULAR_SPEED;  // Turn Left
   }
   else if (values[3] < range_to_avoid)
   {
     linear = 0.0;
-    angular = 0.07;  // Turn Right
+    angular = g_ANGULAR_SPEED;  // Turn Right
   }
   else
   {
-    linear = 0.05;  // Move Straight
+    linear = g_LINEAR_SPEED;  // Move Straight
     angular = 0.0;
   }
 }
@@ -170,12 +178,12 @@ int main(int argc, char **argv) {
     // Find current duration of motion.
     current_duration = ros::Time::now().toSec() - saved_time;
 
-    if (current_duration <= 10.0) {
+    if (current_duration <= 2.0) {
       avoidObstacles(sensor_listener.ir_sensor_values_, linear, angular, turn_direction);
       cmd_vel_msg.linear.x = linear;
       cmd_vel_msg.angular.z = angular;
 
-    } else if (current_duration < 20.0) {
+    } else if (current_duration < 5.0) {
       avoidObstacles(sensor_listener.ir_sensor_values_, linear, angular);
       cmd_vel_msg.linear.x = linear;
       cmd_vel_msg.angular.z = angular;
