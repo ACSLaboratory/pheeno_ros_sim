@@ -3,7 +3,6 @@
 #include "command_line_parser.h"
 #include "pheeno_robot.h"
 
-
 int main(int argc, char **argv)
 {
   // Initial Variables
@@ -27,7 +26,7 @@ int main(int argc, char **argv)
   // Initializing ROS node
   ros::init(argc, argv, "random_walk_node");
 
-  // Create robot object.
+  // Create PheenoRobot object
   PheenoRobot pheeno = PheenoRobot(pheeno_name);
 
   // ROS Rate loop
@@ -63,6 +62,5 @@ int main(int argc, char **argv)
     pheeno.publish(cmd_vel_msg);
     ros::spinOnce();
     loop_rate.sleep();
-
   }
 }
