@@ -17,6 +17,8 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  nav_msgs
+  sensor_msgs
   message_generation
   gazebo_ros
   gazebo_ros_control
@@ -68,6 +70,8 @@ generate_messages(
   actionlib_msgs
   geometry_msgs
   std_msgs
+  nav_msgs
+  sensor_msgs
 )
 
 
@@ -82,7 +86,7 @@ generate_messages(
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES pheeno_ros_sim
-  CATKIN_DEPENDS actionlib actionlib_msgs geometry_msgs roscpp rospy std_msgs message_runtime
+  CATKIN_DEPENDS actionlib actionlib_msgs geometry_msgs roscpp rospy std_msgs nav_msgs sensor_msgs message_runtime
   # DEPENDS system_lib
 )
 

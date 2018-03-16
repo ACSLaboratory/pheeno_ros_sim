@@ -3,7 +3,6 @@
 #include "std_msgs/Int16.h"
 #include "geometry_msgs/Twist.h"
 #include "nav_msgs/Odometry.h"
-#include "pheeno_markov_chain/ColorsFound.h"
 #include "pheeno_robot.h"
 #include <vector>
 #include <complex>
@@ -27,12 +26,6 @@ PheenoRobot::PheenoRobot(std::string pheeno_name)
   for (int i = 0; i < 6; i++)
   {
     ir_sensor_values.push_back(0);
-  }
-
-  // Create Colors found vector upon construction. (4 placements)
-  for (int i = 0; i < 4; i++)
-  {
-    color_state_facing.push_back(false);
   }
 
   // Create Odom vector upon construction. (3 placements)
@@ -64,9 +57,6 @@ PheenoRobot::PheenoRobot(std::string pheeno_name)
                                &PheenoRobot::irSensorBackCallback, this);
   sub_ir_bottom_ = nh_.subscribe(pheeno_name + "/scan_bottom", 10,
                                  &PheenoRobot::irSensorBottomCallback, this);
-
-  sub_pheeno_cam_ = nh_.subscribe(pheeno_name + "/colors_found", 1,
-                                  &PheenoRobot::piCamColorCallback, this);
 
   sub_odom_ = nh_.subscribe(pheeno_name + "/odom", 1,
                             &PheenoRobot::odomCallback, this);
@@ -187,7 +177,7 @@ void PheenoRobot::irSensorBottomCallback(const std_msgs::Int16::ConstPtr& msg)
  * This will set message data to odom pose (position and orientation) and twist
  * (linear and angular) variables.
  *
- * NOTE: ONLY FOR THE PHEENO MARKOV CHAIN SIM EXPERIMENT.
+ * NOTE: ONLY USED IF `libgazebo_ros_p3d.so` PLUGIN IS IN THE XACRO FILE.
  */
 void PheenoRobot::odomCallback(const nav_msgs::Odometry::ConstPtr& msg)
 {
@@ -219,35 +209,6 @@ void PheenoRobot::odomCallback(const nav_msgs::Odometry::ConstPtr& msg)
 void PheenoRobot::piCamCallback()
 {
   ROS_INFO("Not in use yet.");
-}
-
-/*
- * Callback function for `/ColorsFound` ROS subscriber.
- *
- * Recieves a 4x1 vector containing bools for certain colors. If the
- * value is True, the color associated with that position in the vector
- * has been found in the environment. The information is set to an
- * appropriate class data member.
- *
- * NOTE: ONLY USED FOR THE PHEENO MARKOV CHAIN (AND SIM) EXPERIMENT.
- */
-void PheenoRobot::piCamColorCallback(const pheeno_markov_chain::ColorsFound& msg)
-{
-  for (int i = 0; i < 4; i++)
-  {
-    color_state_facing[i] = msg.data[i];
-  }
-}
-
-/*
- * Returns True if the color (associated with an index) has been found. This class
- * data member checked is modified by the member function piCamColorCallback().
- *
- * NOTE: ONLY USED FOR THE PHEENO MARKOV CHAIN (AND SIM) EXPERIMENT.
- */
-bool PheenoRobot::checkFrontColor(int color)
-{
-  return this->color_state_facing[color - 1];  // -1 to zero index.
 }
 
 /*

@@ -6,7 +6,6 @@
 #include "std_msgs/Int16.h"
 #include "geometry_msgs/Twist.h"
 #include "nav_msgs/Odometry.h"
-#include "pheeno_markov_chain/ColorsFound.h"
 #include <vector>
 #include <complex>
 #include <cstdlib>
@@ -89,7 +88,6 @@ private:
 
   // Camera Callback Modules
   void piCamCallback();
-  void piCamColorCallback(const pheeno_markov_chain::ColorsFound& msg);
 };
 
 #endif //GUARD_PHEENO_ROBOT_H
