@@ -85,6 +85,7 @@ PheenoRobot::PheenoRobot(std::string pheeno_name)
   sub_accelerometer_ = nh_.subscribe(pheeno_name + "/accelerometer", 10,
                                      &PheenoRobot::accelerometerCallback, this);
 
+  // cmd_vel Publisher
   pub_cmd_vel_ = nh_.advertise<geometry_msgs::Twist>(pheeno_name + "/cmd_vel", 100);
 
 }

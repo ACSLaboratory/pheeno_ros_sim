@@ -82,7 +82,6 @@ private:
   ros::Subscriber sub_magnetometer_;
   ros::Subscriber sub_gyroscope_;
   ros::Subscriber sub_accelerometer_;
-  
 
   // Private Publishers
   ros::Publisher pub_cmd_vel_;
