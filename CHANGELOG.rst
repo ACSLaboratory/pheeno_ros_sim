@@ -2,6 +2,11 @@
 Changelog for package pheeno_ros_sim
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.1.6 (2018-04-16)
+------------------
+* Fixed code with better practices.
+* Contributors: zmk5
+
 0.1.4 (2017-09-29)
 ------------------
 * Added more build requirements.
