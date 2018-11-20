@@ -16,7 +16,7 @@
 #include <tf/tf.h>
 #include <tf/transform_listener.h>
 
-#include "gazebo_ros_ir_sensor.h"
+#include "pheeno_ros_sim/gazebo_ros_ir_sensor.h"
 
 
 namespace gazebo {
