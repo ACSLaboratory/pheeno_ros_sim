@@ -66,17 +66,17 @@ namespace gazebo {
     private: std::string robot_namespace_;
 
     // deferred load in case ros is blocking
-    private: sdf::ElementPtr sdf;
+    private: sdf::ElementPtr sdf_;
     private: void LoadThread();
     private: boost::thread deferred_load_thread_;
-    private: unsigned int seed;
+    private: unsigned int seed_;
 
     private: gazebo::transport::NodePtr gazebo_node_;
     private: gazebo::transport::SubscriberPtr ir_sensor_scan_sub_;
     private: void OnScan(ConstLaserScanStampedPtr &_msg);
 
     // \brief prevent blocking
-    private: PubMultiQueue pmq;
+    private: PubMultiQueue pmq_;
   };
 }
 #endif

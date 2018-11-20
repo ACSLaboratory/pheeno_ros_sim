@@ -25,7 +25,7 @@ namespace gazebo {
 
   // Constructor
   GazeboRosIrSensor::GazeboRosIrSensor() {
-    this->seed = 0;
+    this->seed_ = 0;
   }
 
   // Destructor
@@ -38,7 +38,7 @@ namespace gazebo {
   void GazeboRosIrSensor::Load(sensors::SensorPtr _parent,
                                sdf::ElementPtr _sdf) {
     // Load plugin
-    RayPlugin::Load(_parent, this->sdf);
+    RayPlugin::Load(_parent, this->sdf_);
 
     // Get the world name.
     # if GAZEBO_MAJOR_VERSION >= 7
@@ -50,7 +50,7 @@ namespace gazebo {
     this->world_ = physics::get_world(worldName);
 
     // Save pointers
-    this->sdf = _sdf;
+    this->sdf_ = _sdf;
 
     GAZEBO_SENSORS_USING_DYNAMIC_POINTER_CAST;
     this->parent_ray_sensor_ =
@@ -61,25 +61,25 @@ namespace gazebo {
 
     this->robot_namespace_ = GetRobotNamespace(_parent, _sdf, "IR_Sensor");
 
-    if (!this->sdf->HasElement("frameName")) {
+    if (!this->sdf_->HasElement("frameName")) {
       ROS_INFO_NAMED(
         "ir_sensor",
         "IR Sensor plugin missing <frameName>, defaults to world");
       this->frame_name_ = "/world";
 
     } else {
-      this->frame_name_ = this->sdf->Get<std::string>("frameName");
+      this->frame_name_ = this->sdf_->Get<std::string>("frameName");
 
     }
 
-    if (!this->sdf->HasElement("topicName")) {
+    if (!this->sdf_->HasElement("topicName")) {
       ROS_INFO_NAMED(
         "ir_sensor",
         "IR Sensor plugin missing <topicName>, defaults to /world");
       this->topic_name_ = "/world";
 
     } else {
-      this->topic_name_ = this->sdf->Get<std::string>("topicName");
+      this->topic_name_ = this->sdf_->Get<std::string>("topicName");
 
     }
 
@@ -107,7 +107,7 @@ namespace gazebo {
       new gazebo::transport::Node());
     this->gazebo_node_->Init(this->world_name_);
 
-    this->pmq.startServiceThread();
+    this->pmq_.startServiceThread();
 
     this->rosnode_ = new ros::NodeHandle(this->robot_namespace_);
 
@@ -137,7 +137,7 @@ namespace gazebo {
           ros::VoidPtr(),
           NULL);
       this->pub_ = this->rosnode_->advertise(ao);
-      this->pub_queue_ = this->pmq.addPub<std_msgs::Float32>();
+      this->pub_queue_ = this->pmq_.addPub<std_msgs::Float32>();
     }
 
     // Initialize the controller
