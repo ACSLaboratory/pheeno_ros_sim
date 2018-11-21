@@ -1,5 +1,5 @@
-#ifndef GUARD_PHEENO_ROBOT_H
-#define GUARD_PHEENO_ROBOT_H
+#ifndef PHEENO_ROS_SIM_PHEENO_ROBOT_H
+#define PHEENO_ROS_SIM_PHEENO_ROBOT_H
 
 #include "ros/ros.h"
 #include "std_msgs/Float32.h"
@@ -11,7 +11,8 @@
 #include <complex>
 #include <cstdlib>
 
-class PheenoRobot {
+class PheenoRobot
+{
 
 public:
   // Constructor
