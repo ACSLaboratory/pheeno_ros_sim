@@ -35,17 +35,17 @@
   <node name="urdf_spawner_5" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x -1 -y 0 -z 0 -model pheeno_05 -param robot_description -robot_namespace pheeno_05"/> -->
 
   <!-- Run python script that will determine random movement and obstacle avoidance for all agents. -->
-  <!--<node name="pheeno_obstacle_avoidance_1" pkg="pheeno_ros_sim" type="obstacle_avoidance.py" args="-n 01"/>-->
-  <!--<node name="pheeno_obstacle_avoidance_2" pkg="pheeno_ros_sim" type="obstacle_avoidance.py" args="-n 02"/>-->
-  <!--<node name="pheeno_obstacle_avoidance_3" pkg="pheeno_ros_sim" type="obstacle_avoidance.py" args="-n 03"/>-->
-  <!--<node name="pheeno_obstacle_avoidance_4" pkg="pheeno_ros_sim" type="obstacle_avoidance.py" args="-n 04"/>-->
-  <!--<node name="pheeno_obstacle_avoidance_5" pkg="pheeno_ros_sim" type="obstacle_avoidance.py" args="-n 05"/>-->
+  <!-- <node name="pheeno_obstacle_avoidance_1" pkg="pheeno_ros" type="obstacle_avoidance.py" args="-n 01"/> -->
+  <!-- <node name="pheeno_obstacle_avoidance_2" pkg="pheeno_ros" type="obstacle_avoidance.py" args="-n 02"/> -->
+  <!-- <node name="pheeno_obstacle_avoidance_3" pkg="pheeno_ros" type="obstacle_avoidance.py" args="-n 03"/> -->
+  <!-- <node name="pheeno_obstacle_avoidance_4" pkg="pheeno_ros" type="obstacle_avoidance.py" args="-n 04"/> -->
+  <!-- <node name="pheeno_obstacle_avoidance_5" pkg="pheeno_ros" type="obstacle_avoidance.py" args="-n 05"/> -->
 
   <!-- Run C++ nodes that will determine random movement and obstacle avoidance for all agents. -->
-  <node name="pheeno_obstacle_avoidance_1" pkg="pheeno_ros_sim" type="obstacle_avoidance_sim" args="-n 01"/>
-  <node name="pheeno_obstacle_avoidance_2" pkg="pheeno_ros_sim" type="obstacle_avoidance_sim" args="-n 02"/>
-  <node name="pheeno_obstacle_avoidance_3" pkg="pheeno_ros_sim" type="obstacle_avoidance_sim" args="-n 03"/>
-  <node name="pheeno_obstacle_avoidance_4" pkg="pheeno_ros_sim" type="obstacle_avoidance_sim" args="-n 04"/>
-  <node name="pheeno_obstacle_avoidance_5" pkg="pheeno_ros_sim" type="obstacle_avoidance_sim" args="-n 05"/>
+  <node name="pheeno_obstacle_avoidance_1" pkg="pheeno_ros" type="obstacle_avoidance" args="-n 01"/>
+  <node name="pheeno_obstacle_avoidance_2" pkg="pheeno_ros" type="obstacle_avoidance" args="-n 02"/>
+  <node name="pheeno_obstacle_avoidance_3" pkg="pheeno_ros" type="obstacle_avoidance" args="-n 03"/>
+  <node name="pheeno_obstacle_avoidance_4" pkg="pheeno_ros" type="obstacle_avoidance" args="-n 04"/>
+  <node name="pheeno_obstacle_avoidance_5" pkg="pheeno_ros" type="obstacle_avoidance" args="-n 05"/>
 
 </launch>

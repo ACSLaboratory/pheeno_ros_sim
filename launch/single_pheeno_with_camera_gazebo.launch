@@ -31,9 +31,9 @@
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model pheeno -param robot_description"/>
 
   <!-- Run python script that will determine random movement and obstacle avoidance for all agents. -->
-  <!--<node name="pheeno_obstacle_avoidance_1" pkg="pheeno_ros_sim" type="obstacle_avoidance.py" args="-n 01"/>-->
+  <!-- <node name="pheeno_obstacle_avoidance_1" pkg="pheeno_ros" type="obstacle_avoidance.py" args="-n 01"/> -->
 
   <!-- Run C++ nodes that will determine random movement and obstacle avoidance for all agents. -->
-  <node name="pheeno_obstacle_avoidance_1" pkg="pheeno_ros_sim" type="obstacle_avoidance_sim" args="-n 01"/>
+  <node name="pheeno_obstacle_avoidance_1" pkg="pheeno_ros" type="obstacle_avoidance" args="-n 01"/>
 
 </launch>
