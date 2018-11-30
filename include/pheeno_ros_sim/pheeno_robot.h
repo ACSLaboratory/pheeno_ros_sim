@@ -114,4 +114,4 @@ private:
   void piCamCallback();
 };
 
-#endif //GUARD_PHEENO_ROBOT_H
+#endif // PHEENO_ROS_SIM_PHEENO_ROBOT_H

@@ -23,8 +23,10 @@
 
 #include <gazebo_plugins/PubQueue.h>
 
-namespace gazebo {
-  class GazeboRosIrSensor : public RayPlugin {
+namespace gazebo
+{
+  class GazeboRosIrSensor : public RayPlugin
+  {
     // \brief Constructor
     public: GazeboRosIrSensor();
 
@@ -79,4 +81,5 @@ namespace gazebo {
     private: PubMultiQueue pmq_;
   };
 }
+
 #endif

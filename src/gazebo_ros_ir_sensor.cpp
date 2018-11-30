@@ -19,24 +19,28 @@
 #include "pheeno_ros_sim/gazebo_ros_ir_sensor.h"
 
 
-namespace gazebo {
+namespace gazebo
+{
   // Register this plugin with the simulator
   GZ_REGISTER_SENSOR_PLUGIN(GazeboRosIrSensor)
 
   // Constructor
-  GazeboRosIrSensor::GazeboRosIrSensor() {
+  GazeboRosIrSensor::GazeboRosIrSensor()
+  {
     this->seed_ = 0;
   }
 
   // Destructor
-  GazeboRosIrSensor::~GazeboRosIrSensor() {
+  GazeboRosIrSensor::~GazeboRosIrSensor()
+  {
     this->rosnode_->shutdown();
     delete this->rosnode_;
   }
 
   // Load the controller
   void GazeboRosIrSensor::Load(sensors::SensorPtr _parent,
-                               sdf::ElementPtr _sdf) {
+                               sdf::ElementPtr _sdf)
+  {
     // Load plugin
     RayPlugin::Load(_parent, this->sdf_);
 
@@ -61,32 +65,35 @@ namespace gazebo {
 
     this->robot_namespace_ = GetRobotNamespace(_parent, _sdf, "IR_Sensor");
 
-    if (!this->sdf_->HasElement("frameName")) {
+    if (!this->sdf_->HasElement("frameName"))
+    {
       ROS_INFO_NAMED(
         "ir_sensor",
         "IR Sensor plugin missing <frameName>, defaults to world");
       this->frame_name_ = "/world";
-
-    } else {
+    }
+    else
+    {
       this->frame_name_ = this->sdf_->Get<std::string>("frameName");
-
     }
 
-    if (!this->sdf_->HasElement("topicName")) {
+    if (!this->sdf_->HasElement("topicName"))
+    {
       ROS_INFO_NAMED(
         "ir_sensor",
         "IR Sensor plugin missing <topicName>, defaults to /world");
       this->topic_name_ = "/world";
-
-    } else {
+    }
+    else
+    {
       this->topic_name_ = this->sdf_->Get<std::string>("topicName");
-
     }
 
     this->ir_sensor_connect_count_ = 0;
 
     // Make sure the ROS node for Gazebo has already been initialized.
-    if (!ros::isInitialized()) {
+    if (!ros::isInitialized())
+    {
       ROS_FATAL_STREAM_NAMED("ir_sensor", "A ROS node for Gazebo has not been initialized, unable to load plugin. " << "Load the Gazebo system plugin 'libgazebo_ros_api_plugin.so' in the gazebo_ros package)");
       return;
     }
@@ -102,7 +109,8 @@ namespace gazebo {
   }
 
   // Load the controller
-  void GazeboRosIrSensor::LoadThread() {
+  void GazeboRosIrSensor::LoadThread()
+  {
     this->gazebo_node_ = gazebo::transport::NodePtr(
       new gazebo::transport::Node());
     this->gazebo_node_->Init(this->world_name_);
@@ -112,10 +120,10 @@ namespace gazebo {
     this->rosnode_ = new ros::NodeHandle(this->robot_namespace_);
 
     this->tf_prefix_ = tf::getPrefixParam(*this->rosnode_);
-    if (this->tf_prefix_.empty()) {
+    if (this->tf_prefix_.empty())
+    {
       this->tf_prefix_ = this->robot_namespace_;
       boost::trim_right_if(this->tf_prefix_, boost::is_any_of("/"));
-
     }
 
     ROS_INFO_NAMED(
@@ -127,7 +135,8 @@ namespace gazebo {
     // Resolve tf prefix
     this->frame_name_ = tf::resolve(this->tf_prefix_, this->frame_name_);
 
-    if (this->topic_name_ != "") {
+    if (this->topic_name_ != "")
+    {
       ros::AdvertiseOptions ao =
         ros::AdvertiseOptions::create<std_msgs::Float32>(
           this->topic_name_,
@@ -148,9 +157,11 @@ namespace gazebo {
   }
 
   // Increment Count
-  void GazeboRosIrSensor::IrSensorConnect() {
+  void GazeboRosIrSensor::IrSensorConnect()
+  {
     this->ir_sensor_connect_count_++;
-    if (this->ir_sensor_connect_count_ == 1) {
+    if (this->ir_sensor_connect_count_ == 1)
+    {
       # if GAZEBO_MAJOR_VERSION >= 7
         this->ir_sensor_scan_sub_ =
           this->gazebo_node_->Subscribe(this->parent_ray_sensor_->Topic(),
@@ -164,9 +175,11 @@ namespace gazebo {
   }
 
   // Decrement Count
-  void GazeboRosIrSensor::IrSensorDisconnect() {
+  void GazeboRosIrSensor::IrSensorDisconnect()
+  {
     this->ir_sensor_connect_count_--;
-    if (this->ir_sensor_connect_count_ == 0) {
+    if (this->ir_sensor_connect_count_ == 0)
+    {
       this->ir_sensor_scan_sub_.reset();
     }
   }
@@ -189,7 +202,8 @@ namespace gazebo {
    * value coming from `_msg->scan().ranges(0)` and then multiplying it by
    * 100 to return the values in cm instead of m.
    **************************************************************/
-  void GazeboRosIrSensor::OnScan(ConstLaserScanStampedPtr &_msg) {
+  void GazeboRosIrSensor::OnScan(ConstLaserScanStampedPtr &_msg)
+  {
     // Declare ROS Message
     std_msgs::Float32 ir_sensor_msg;
 
