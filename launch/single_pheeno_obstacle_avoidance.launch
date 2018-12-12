@@ -1,4 +1,8 @@
 <launch>
+  <!-- Load Parameter Server -->
+  <rosparam file="$(find pheeno_ros_sim)/config/pheeno_sim_params.yaml"
+            command="load"/>
+
   <!-- Args for use later -->
   <arg name="paused" default="false"/>
   <arg name="use_sim_time" default="true"/>
