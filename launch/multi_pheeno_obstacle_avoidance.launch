@@ -4,7 +4,7 @@
             command="load"/>
 
   <!-- Args for use later -->
-  <arg name="paused" default="false"/>
+  <arg name="paused" default="true"/>
   <arg name="use_sim_time" default="true"/>
   <arg name="gui" default="true"/>
   <arg name="headless" default="false"/>
@@ -20,36 +20,65 @@
     <arg name="headless" value="$(arg headless)"/>
   </include>
 
-  <!-- URDF XML Pheeno robot description loaded on the parameter server. -->
-  <param name="robot_description" command="$(find xacro)/xacro.py '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno.xacro'"/>
+  <!-- Namespace for each robot. Applies namespace (ns) to each node topic in group. -->
+  <group ns="pheeno_01">
+    <!-- Load robot description and spawn robot model. -->
+    <param name="robot_description"
+           command="$(find xacro)/xacro.py '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno.xacro'"/>
+    <node name="urdf_spawner_1" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          args="-urdf -x 0.50 -y 0.50 -model pheeno_01 -param robot_description"/>
 
-  <!-- Start Joint State Publisher -->
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"></node>
+    <!-- C++ or Python node for obstacle avoidance. Comment one or another, but not both! -->
+    <!-- <node name="pheeno_obstacle_avoidance_1" pkg="pheeno_ros" type="obstacle_avoidance.py" args="-n 01"/> -->
+    <node name="pheeno_obstacle_avoidance_1" pkg="pheeno_ros" type="obstacle_avoidance" args="-n 01"/>
+  </group>
 
-  <!-- Start Robot State Publisher -->
-  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
-    <param name="publish_frequency" type="double" value="50.0"/>
-  </node>
+  <group ns="pheeno_02">
+    <!-- Load robot description and spawn robot model. -->
+    <param name="robot_description"
+           command="$(find xacro)/xacro.py '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno.xacro'"/>
+    <node name="urdf_spawner_2" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          args="-urdf -x 0 -y 0 -model pheeno_02 -param robot_description"/>
 
-  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
-  <node name="urdf_spawner_1" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x 1 -y 0 -z 0 -model pheeno_01 -param robot_description -robot_namespace pheeno_01"/>
-  <node name="urdf_spawner_2" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x 0 -y 0 -z 0 -model pheeno_02 -param robot_description -robot_namespace pheeno_02"/>
-  <node name="urdf_spawner_3" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x 0 -y -1 -z 0 -model pheeno_03 -param robot_description -robot_namespace pheeno_03"/>
-  <node name="urdf_spawner_4" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x 0 -y 1 -z 0 -model pheeno_04 -param robot_description -robot_namespace pheeno_04"/>
-  <node name="urdf_spawner_5" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x -1 -y 0 -z 0 -model pheeno_05 -param robot_description -robot_namespace pheeno_05"/> -->
+    <!-- C++ or Python node for obstacle avoidance. Comment one or another, but not both! -->
+    <!-- <node name="pheeno_obstacle_avoidance_2" pkg="pheeno_ros" type="obstacle_avoidance.py" args="-n 02"/> -->
+    <node name="pheeno_obstacle_avoidance_2" pkg="pheeno_ros" type="obstacle_avoidance" args="-n 02"/>
+  </group>
 
-  <!-- Run python script that will determine random movement and obstacle avoidance for all agents. -->
-  <!-- <node name="pheeno_obstacle_avoidance_1" pkg="pheeno_ros" type="obstacle_avoidance.py" args="-n 01"/> -->
-  <!-- <node name="pheeno_obstacle_avoidance_2" pkg="pheeno_ros" type="obstacle_avoidance.py" args="-n 02"/> -->
-  <!-- <node name="pheeno_obstacle_avoidance_3" pkg="pheeno_ros" type="obstacle_avoidance.py" args="-n 03"/> -->
-  <!-- <node name="pheeno_obstacle_avoidance_4" pkg="pheeno_ros" type="obstacle_avoidance.py" args="-n 04"/> -->
-  <!-- <node name="pheeno_obstacle_avoidance_5" pkg="pheeno_ros" type="obstacle_avoidance.py" args="-n 05"/> -->
+  <group ns="pheeno_03">
+    <!-- Load robot description and spawn robot model. -->
+    <param name="robot_description"
+           command="$(find xacro)/xacro.py '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno.xacro'"/>
+    <node name="urdf_spawner_3" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          args="-urdf -x 0.50 -y -0.50 -model pheeno_03 -param robot_description"/>
 
-  <!-- Run C++ nodes that will determine random movement and obstacle avoidance for all agents. -->
-  <node name="pheeno_obstacle_avoidance_1" pkg="pheeno_ros" type="obstacle_avoidance" args="-n 01"/>
-  <node name="pheeno_obstacle_avoidance_2" pkg="pheeno_ros" type="obstacle_avoidance" args="-n 02"/>
-  <node name="pheeno_obstacle_avoidance_3" pkg="pheeno_ros" type="obstacle_avoidance" args="-n 03"/>
-  <node name="pheeno_obstacle_avoidance_4" pkg="pheeno_ros" type="obstacle_avoidance" args="-n 04"/>
-  <node name="pheeno_obstacle_avoidance_5" pkg="pheeno_ros" type="obstacle_avoidance" args="-n 05"/>
+    <!-- C++ or Python node for obstacle avoidance. Comment one or another, but not both! -->
+    <!-- <node name="pheeno_obstacle_avoidance_3" pkg="pheeno_ros" type="obstacle_avoidance.py" args="-n 03"/> -->
+    <node name="pheeno_obstacle_avoidance_3" pkg="pheeno_ros" type="obstacle_avoidance" args="-n 03"/>
+  </group>
+
+  <group ns="pheeno_04">
+    <!-- Load robot description and spawn robot model. -->
+    <param name="robot_description"
+           command="$(find xacro)/xacro.py '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno.xacro'"/>
+    <node name="urdf_spawner_4" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          args="-urdf -x -0.50 -y -0.50 -model pheeno_04 -param robot_description"/>
+
+    <!-- C++ or Python node for obstacle avoidance. Comment one or another, but not both! -->
+    <!-- <node name="pheeno_obstacle_avoidance_4" pkg="pheeno_ros" type="obstacle_avoidance.py" args="-n 04"/> -->
+    <node name="pheeno_obstacle_avoidance_4" pkg="pheeno_ros" type="obstacle_avoidance" args="-n 04"/>
+  </group>
+  
+  <group ns="pheeno_05">
+    <!-- Load robot description and spawn robot model. -->
+    <param name="robot_description"
+           command="$(find xacro)/xacro.py '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno.xacro'"/>
+    <node name="urdf_spawner_5" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          args="-urdf -x -0.50 -y 0.50 -model pheeno_05 -param robot_description"/>
+
+    <!-- C++ or Python node for obstacle avoidance. Comment one or another, but not both! -->
+    <!-- <node name="pheeno_obstacle_avoidance_5" pkg="pheeno_ros" type="obstacle_avoidance.py" args="-n 05"/> -->
+    <node name="pheeno_obstacle_avoidance_5" pkg="pheeno_ros" type="obstacle_avoidance" args="-n 05"/>
+  </group>
 
 </launch>

@@ -1,6 +1,6 @@
 <launch>
   <!-- Args for use later -->
-  <arg name="paused" default="false"/>
+  <arg name="paused" default="true"/>
   <arg name="use_sim_time" default="true"/>
   <arg name="gui" default="true"/>
   <arg name="headless" default="false"/>
@@ -16,18 +16,13 @@
     <arg name="headless" value="$(arg headless)"/>
   </include>
 
-  <!-- URDF XML Pheeno robot description loaded on the parameter server. -->
-  <param name="robot_description" command="$(find xacro)/xacro.py '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno.xacro'"/>
-
-  <!-- Start Joint State Publisher -->
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"></node>
-
-  <!-- Start Robot State Publisher -->
-  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
-    <param name="publish_frequency" type="double" value="50.0"/>
-  </node>
-
-  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
-  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model pheeno_01 -param robot_description -robot_namespace pheeno_01"/>
+  <!-- Namespace for each robot. Applies namespace (ns) to each node topic in group. -->
+  <group ns="pheeno_01">
+    <!-- Load robot description and spawn robot model. -->
+    <param name="robot_description"
+           command="$(find xacro)/xacro.py '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno.xacro'"/>
+    <node name="urdf_spawner_1" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          args="-urdf -model pheeno_01 -param robot_description"/>
+  </group>
 
 </launch>
