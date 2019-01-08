@@ -24,7 +24,7 @@
   <group ns="pheeno_01">
     <!-- Load robot description and spawn robot model. -->
     <param name="robot_description"
-           command="$(find xacro)/xacro.py '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno_with_camera.xacro'"/>
+           command="$(find xacro)/xacro.py --inorder '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno_with_camera.xacro'"/>
     <node name="urdf_spawner_1" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
           args="-urdf -model pheeno_01 -param robot_description"/>
 
