@@ -1,0 +1,84 @@
+<launch>
+  <!-- Load Parameter Server -->
+  <rosparam file="$(find pheeno_ros_sim)/config/pheeno_sim_params.yaml"
+            command="load"/>
+
+  <!-- Args for use later -->
+  <arg name="paused" default="true"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+
+  <!-- To use an empty world, keep the file as is. If you would like a small boundary or testbed, comment line 10 and uncomment line 11. -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+  <!-- <include file="$(find pheeno_ros_sim)/launch/testbed.launch"> -->
+    <arg name="debug" value="$(arg debug)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+  </include>
+
+  <!-- Namespace for each robot. Applies namespace (ns) to each node topic in group. -->
+  <group ns="pheeno_01">
+    <!-- Load robot description and spawn robot model. -->
+    <param name="robot_description"
+           command="$(find xacro)/xacro.py --inorder '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno.xacro'"/>
+    <node name="urdf_spawner_1" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          args="-urdf -x 0.50 -y 0.50 -model pheeno_01 -param robot_description"/>
+
+    <!-- C++ or Python node for random walk. Comment one or another, but not both! -->
+    <!-- <node name="pheeno_random_walk_1" pkg="pheeno_ros" type="random_walk.py" args="-n 01"/> -->
+    <node name="pheeno_random_walk_1" pkg="pheeno_ros" type="random_walk" args="-n 01"/>
+  </group>
+
+  <group ns="pheeno_02">
+    <!-- Load robot description and spawn robot model. -->
+    <param name="robot_description"
+           command="$(find xacro)/xacro.py --inorder '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno.xacro'"/>
+    <node name="urdf_spawner_2" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          args="-urdf -x 0 -y 0 -model pheeno_02 -param robot_description"/>
+
+    <!-- C++ or Python node for random walk. Comment one or another, but not both! -->
+    <!-- <node name="pheeno_random_walk_2" pkg="pheeno_ros" type="random_walk.py" args="-n 02"/> -->
+    <node name="pheeno_random_walk_2" pkg="pheeno_ros" type="random_walk" args="-n 02"/>
+  </group>
+
+  <group ns="pheeno_03">
+    <!-- Load robot description and spawn robot model. -->
+    <param name="robot_description"
+           command="$(find xacro)/xacro.py --inorder '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno.xacro'"/>
+    <node name="urdf_spawner_3" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          args="-urdf -x 0.50 -y -0.50 -model pheeno_03 -param robot_description"/>
+
+    <!-- C++ or Python node for random walk. Comment one or another, but not both! -->
+    <!-- <node name="pheeno_random_walk_3" pkg="pheeno_ros" type="random_walk.py" args="-n 03"/> -->
+    <node name="pheeno_random_walk_3" pkg="pheeno_ros" type="random_walk" args="-n 03"/>
+  </group>
+
+  <group ns="pheeno_04">
+    <!-- Load robot description and spawn robot model. -->
+    <param name="robot_description"
+           command="$(find xacro)/xacro.py --inorder '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno.xacro'"/>
+    <node name="urdf_spawner_4" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          args="-urdf -x -0.50 -y -0.50 -model pheeno_04 -param robot_description"/>
+
+    <!-- C++ or Python node for random walk. Comment one or another, but not both! -->
+    <!-- <node name="pheeno_random_walk_4" pkg="pheeno_ros" type="random_walk.py" args="-n 04"/> -->
+    <node name="pheeno_random_walk_4" pkg="pheeno_ros" type="random_walk" args="-n 04"/>
+  </group>
+  
+  <group ns="pheeno_05">
+    <!-- Load robot description and spawn robot model. -->
+    <param name="robot_description"
+           command="$(find xacro)/xacro.py --inorder '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno.xacro'"/>
+    <node name="urdf_spawner_5" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          args="-urdf -x -0.50 -y 0.50 -model pheeno_05 -param robot_description"/>
+
+    <!-- C++ or Python node for random_walk. Comment one or another, but not both! -->
+    <!-- <node name="pheeno_random_walk_5" pkg="pheeno_ros" type="random_walk.py" args="-n 05"/> -->
+    <node name="pheeno_random_walk_5" pkg="pheeno_ros" type="random_walk" args="-n 05"/>
+  </group>
+
+</launch>
