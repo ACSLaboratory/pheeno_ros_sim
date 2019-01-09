@@ -24,7 +24,7 @@
   <group ns="pheeno_01">
     <!-- Load robot description and spawn robot model. -->
     <param name="robot_description"
-           command="$(find xacro)/xacro.py --inorder '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno_with_camera.xacro'"/>
+           command="$(find xacro)/xacro --inorder '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno_with_camera.xacro'"/>
     <node name="urdf_spawner_1" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
           args="-urdf -x 0.50 -y 0.50 -model pheeno_01 -param robot_description"/>
 
@@ -36,7 +36,7 @@
   <group ns="pheeno_02">
     <!-- Load robot description and spawn robot model. -->
     <param name="robot_description"
-           command="$(find xacro)/xacro.py --inorder '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno_with_camera.xacro'"/>
+           command="$(find xacro)/xacro --inorder '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno_with_camera.xacro'"/>
     <node name="urdf_spawner_2" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
           args="-urdf -x 0 -y 0 -model pheeno_02 -param robot_description"/>
     
@@ -48,7 +48,7 @@
   <group ns="pheeno_03">
     <!-- Load robot description and spawn robot model. -->
     <param name="robot_description"
-           command="$(find xacro)/xacro.py --inorder '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno_with_camera.xacro'"/>
+           command="$(find xacro)/xacro --inorder '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno_with_camera.xacro'"/>
     <node name="urdf_spawner_3" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
           args="-urdf -x 0.50 -y -0.50 -model pheeno_03 -param robot_description"/>
 
@@ -60,7 +60,7 @@
   <group ns="pheeno_04">
     <!-- Load robot description and spawn robot model. -->
     <param name="robot_description"
-           command="$(find xacro)/xacro.py --inorder '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno_with_camera.xacro'"/>
+           command="$(find xacro)/xacro --inorder '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno_with_camera.xacro'"/>
     <node name="urdf_spawner_4" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
           args="-urdf -x -0.50 -y -0.50 -model pheeno_04 -param robot_description"/>
 
@@ -72,7 +72,7 @@
   <group ns="pheeno_05">
     <!-- Load robot description and spawn robot model. -->
     <param name="robot_description"
-           command="$(find xacro)/xacro.py --inorder '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno_with_camera.xacro'"/>
+           command="$(find xacro)/xacro --inorder '$(find pheeno_ros_description)/urdf/pheeno_v2/pheeno_with_camera.xacro'"/>
     <node name="urdf_spawner_5" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
           args="-urdf -x -0.50 -y 0.50 -model pheeno_05 -param robot_description"/>
     
